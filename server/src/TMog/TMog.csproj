@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{469BAFFE-6A8A-46E6-A6F0-B42E6E8C2F2E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TMog</RootNamespace>
+    <AssemblyName>TMog</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\bin\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\bin\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\..\bin\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\bin\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Pair.cs" />
+    <Compile Include="Common\PairMapper.cs" />
+    <Compile Include="Data\Common\Pair.cs" />
+    <Compile Include="Data\Common\PairMapper.cs" />
+    <Compile Include="Data\Configuration\ItemEntityConfiguration.cs" />
+    <Compile Include="Data\Configuration\SetEntityConfiguration.cs" />
+    <Compile Include="Data\Configuration\SourceEntityConfiguration.cs" />
+    <Compile Include="Data\Configuration\TMogDbInitializer.cs" />
+    <Compile Include="Data\Configuration\ZoneEntityConfiguration.cs" />
+    <Compile Include="Data\ITMogDatabase.cs">
+      <DependentUpon>TMogDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Migrations\MigrationConfiguration.cs" />
+    <Compile Include="Data\TMogDatabase.cs" />
+    <Compile Include="Business\SlotManager.cs" />
+    <Compile Include="Entities\DropLevel.cs" />
+    <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\ItemInfo.cs" />
+    <Compile Include="Entities\QualityType.cs" />
+    <Compile Include="Entities\Set.cs" />
+    <Compile Include="Entities\SlotType.cs" />
+    <Compile Include="Entities\Source.cs" />
+    <Compile Include="Entities\SourceSubType.cs" />
+    <Compile Include="Entities\SourceType.cs" />
+    <Compile Include="Entities\Zone.cs" />
+    <Compile Include="Models\ItemsByZone.cs" />
+    <Compile Include="Models\ZoneItem.cs" />
+    <Compile Include="Models\SetInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DuplicateEntityException.cs" />
+    <Compile Include="Services\ISetsService.cs">
+      <DependentUpon>SetsService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ItemsService.cs" />
+    <Compile Include="Services\SetsService.cs" />
+    <Compile Include="WowheadApi\Infrastructure\ItemXmlData.cs" />
+    <Compile Include="WowheadApi\Infrastructure\WowheadItem.cs" />
+    <Compile Include="WowheadApi\Infrastructure\WowheadItemSource.cs" />
+    <Compile Include="WowheadApi\Infrastructure\WowheadJsonData.cs" />
+    <Compile Include="WowheadApi\Infrastructure\WowheadJsonEquipData.cs" />
+    <Compile Include="WowheadApi\Infrastructure\WowheadJsonSource.cs" />
+    <Compile Include="WowheadApi\Infrastructure\WowheadSet.cs" />
+    <Compile Include="WowheadApi\IWowheadItem.cs" />
+    <Compile Include="WowheadApi\IWowheadItemSource.cs" />
+    <Compile Include="WowheadApi\IWowheadProvider.cs" />
+    <Compile Include="WowheadApi\IWowheadSet.cs" />
+    <Compile Include="WowheadApi\WowheadProvider.cs" />
+    <Compile Include="WowheadApi\WowheadProviderException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

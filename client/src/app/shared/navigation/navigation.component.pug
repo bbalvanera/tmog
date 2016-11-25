@@ -1,0 +1,22 @@
+nav.navbar.navbar-default.navbar-fixed-top
+  .container
+    .navbar-header
+      a.navbar-brand(href="/dashboard") My Daily WoW
+      button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+    .navbar-collapse.collapse
+      ul.nav.navbar-nav
+        li(routerLinkActive="active")
+          a(routerLink="/dashboard") Dashboard
+        li(routerLinkActive="active")
+          a(routerLink="/quests") Quests
+        li
+          a(href="#") Achievements
+        li
+          a(href="#") Mounts &amp; Pets
+        li
+          a(href="#") Recepies
+        li(routerLinkActive="active")
+          a(routerLink="/tmog-sets") Sets

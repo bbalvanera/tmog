@@ -1,0 +1,13 @@
+﻿namespace TMog.WebApi.Models
+{
+    public class TMogSet
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public int TotalSlots { get; set; }
+
+        public int CompletedSlots { get; set; }
+    }
+}

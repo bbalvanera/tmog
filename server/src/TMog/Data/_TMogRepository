@@ -1,0 +1,422 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using TMog.Data.Common;
+using TMog.Entities;
+using TMog.WowheadApi;
+
+namespace TMog.Data
+{
+    public class TMogRepository
+    {
+        private TMogDatabase context = new TMogDatabase();
+        private IWowheadProvider wowheadProvider = new WowheadProvider();
+
+        private PairMapper<SlotType, int> SlotMapper = new PairMapper<SlotType, int>(new Pair<SlotType, int>[]
+        {
+            new Pair<SlotType, int>(SlotType.Other, 0),
+            new Pair<SlotType, int>(SlotType.Head, 1),
+            new Pair<SlotType, int>(SlotType.Necklace, 2),
+            new Pair<SlotType, int>(SlotType.Shoulder, 3),
+            new Pair<SlotType, int>(SlotType.Shirt, 4),
+            new Pair<SlotType, int>(SlotType.Chest, 5),
+            new Pair<SlotType, int>(SlotType.Waist, 6),
+            new Pair<SlotType, int>(SlotType.Legs, 7),
+            new Pair<SlotType, int>(SlotType.Feet, 8),
+            new Pair<SlotType, int>(SlotType.Wrist, 9),
+            new Pair<SlotType, int>(SlotType.Hands, 10)
+        });
+
+        public IEnumerable<SetInfo> GetAllSets()
+        {
+            List<Set> source = QueryableExtensions.Include<Set, ICollection<Item>>(this.context.Sets, (Set s) => s.Items).ToList<Set>();
+            return from s in source
+                   select new SetInfo(s) into s
+                   orderby s.Name
+                   select s;
+        }
+
+        public Set GetSetById(int setId)
+        {
+            return this.context.Sets.Find(new object[]
+            {
+                setId
+            });
+        }
+
+        public Set GetItemsBySetId(int setId, bool excludeAcquired = false)
+        {
+            Set set = this.context.Sets.FirstOrDefault((Set s) => s.SetId == setId);
+            if (set != null)
+            {
+                if (excludeAcquired)
+                {
+                    QueryableExtensions.Load(QueryableExtensions.Include<Item>(from i in this.context.Entry<Set>(set).Collection<Item>((Set s) => s.Items).Query()
+                                                                               where !i.Hidden && !i.Acquired
+                                                                               select i, "Sources.Zone"));
+                }
+                else
+                {
+                    QueryableExtensions.Load(QueryableExtensions.Include<Item>(from i in this.context.Entry<Set>(set).Collection<Item>((Set s) => s.Items).Query()
+                                                                               where !i.Hidden
+                                                                               select i, "Sources.Zone"));
+                }
+            }
+            return set;
+        }
+
+        public Item GetItemById(int itemId)
+        {
+            return this.context.Items.Find(new object[]
+            {
+                itemId
+            });
+        }
+
+        public IEnumerable<Item> GetItemsByNameOrId(string nameOrId)
+        {
+            List<Item> list = (from i in QueryableExtensions.Include<Item, Set>(this.context.Items, (Item i) => i.Set)
+                               where i.ItemId.ToString() == nameOrId || i.Name.StartsWith(nameOrId)
+                               select i).ToList<Item>();
+            int itemId = 0;
+            if (list.Count<Item>() == 0 && int.TryParse(nameOrId, out itemId))
+            {
+                IWowheadItem itemById = this.wowheadProvider.GetItemById(itemId);
+                if (itemById != null)
+                {
+                    Item item = this.Map(itemById);
+                    list = new List<Item>
+                    {
+                        item
+                    };
+                }
+            }
+            return list;
+        }
+
+        public IEnumerable<IGrouping<int?, ZoneItem>> GetAllItemsByZone()
+        {
+            DbRawSqlQuery<ZoneItem> source = this.context.Database.SqlQuery<ZoneItem>("dbo.AllItemsByZone", new object[0]);
+            return from z in source
+                   group z by z.ZoneId;
+        }
+
+        public IEnumerable<IGrouping<int?, ZoneItem>> GetAllSetItemsByZone(int setId)
+        {
+            DbRawSqlQuery<ZoneItem> source = this.context.Database.SqlQuery<ZoneItem>("dbo.AllSetItemsByZone @p0", new object[]
+            {
+                setId
+            });
+            return from z in source
+                   group z by z.ZoneId;
+        }
+
+        public IEnumerable<IGrouping<int?, ZoneItem>> GetAllItemsInZone(int zoneId)
+        {
+            DbRawSqlQuery<ZoneItem> source = this.context.Database.SqlQuery<ZoneItem>("dbo.AllItemsInZone @p0", new object[]
+            {
+                zoneId
+            });
+            return from z in source
+                   group z by z.ZoneId;
+        }
+
+        public IEnumerable<IGrouping<int?, ZoneItem>> GetAllBuyableItemsByZone()
+        {
+            DbRawSqlQuery<ZoneItem> source = this.context.Database.SqlQuery<ZoneItem>("dbo.AllBuyableItemsByZone", new object[0]);
+            return from z in source
+                   group z by z.ZoneId;
+        }
+
+        public IEnumerable<Zone> GetAllZones()
+        {
+            return from z in this.context.Zones
+                   orderby z.Name
+                   select z;
+        }
+
+        public void SaveSet(Set set)
+        {
+            if (set == null)
+            {
+                throw new ArgumentNullException("set");
+            }
+            Set itemsBySetId = this.GetItemsBySetId(set.SetId, false);
+            if (itemsBySetId != null)
+            {
+                throw new ArgumentException("Duplicated Set found.");
+            }
+            this.context.Sets.Add(set);
+            this.context.SaveChanges();
+        }
+
+        public void SaveSet(int setId)
+        {
+            Set setById = this.GetSetById(setId);
+            if (setById != null)
+            {
+                throw new ArgumentException("Duplciated set found.");
+            }
+            if (setId >= 0)
+            {
+                IWowheadSet setById2 = this.wowheadProvider.GetSetById(setId);
+                if (setById2 != null)
+                {
+                    Set set = new Set();
+                    set.SetId = setId;
+                    set.Name = setById2.Name;
+                    set.CompletedSlots = CompletedSlots.Default;
+                    set.Items = setById2.Items.Select(delegate (IWowheadItem i)
+                    {
+                        Item item = this.Map(i);
+                        item.Sources = this.GetOrCreateSourceIfNotExists(i.Sources);
+                        return item;
+                    }).ToList<Item>();
+                    Set set2 = set;
+                    this.context.Sets.Add(set2);
+                    this.context.SaveChanges();
+                }
+            }
+        }
+
+        public void SaveSetItem(int itemId, int setId)
+        {
+            if (setId > 0 && itemId > 0)
+            {
+                Item itemById = this.GetItemById(itemId);
+                if (itemById != null)
+                {
+                    if (itemById.SetId != setId)
+                    {
+                        throw new ArgumentNullException("Item belongs to another set already.");
+                    }
+                }
+                else
+                {
+                    IWowheadItem itemById2 = this.wowheadProvider.GetItemById(itemId);
+                    if (itemById2 != null)
+                    {
+                        Item item = this.Map(itemById2);
+                        item.Sources = this.GetOrCreateSourceIfNotExists(itemById2.Sources);
+                        item.SetId = setId;
+                        this.context.Items.Add(item);
+                        this.context.SaveChanges();
+                    }
+                }
+            }
+        }
+
+        public void DeleteSetById(int setId)
+        {
+            this.context.Entry<Set>(new Set
+            {
+                SetId = setId
+            }).State = EntityState.Deleted;
+            this.context.SaveChanges();
+        }
+
+        public void DeleteSetItemById(int setId, int itemId)
+        {
+            Item item = this.context.Items.FirstOrDefault((Item i) => i.SetId == setId && i.ItemId == itemId);
+            if (item != null)
+            {
+                this.context.Items.Remove(item);
+                this.context.SaveChanges();
+            }
+        }
+
+        public void UpdateItemAcquiredStatus(int setId, int itemId, bool acquired)
+        {
+            Item updateItem = this.context.Items.FirstOrDefault((Item i) => i.SetId == setId && i.ItemId == itemId);
+            if (updateItem != null)
+            {
+                updateItem.Acquired = acquired;
+                updateItem.Hidden = false;
+                (from i in this.context.Items
+                 where i.SetId == setId && (int)i.Slot == (int)updateItem.Slot && i.ItemId != updateItem.ItemId
+                 select i).ToList<Item>().ForEach(delegate (Item i)
+                 {
+                     i.Hidden = acquired;
+                 });
+                this.UpdateSetAcquiredSlots(setId, updateItem.Slot, acquired);
+                this.context.SaveChanges();
+            }
+        }
+
+        public void UpdateZones(IEnumerable<Zone> zones)
+        {
+            QueryableExtensions.Load(this.context.Zones);
+            using (IEnumerator<Zone> enumerator = zones.GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                {
+                    Zone zone = enumerator.Current;
+                    this.context.Zones.Local.Single((Zone z) => z.ZoneId == zone.ZoneId).Name = zone.Name;
+                }
+            }
+            this.context.SaveChanges();
+        }
+
+        public void UpdateItem(Item item)
+        {
+            Item item2 = this.context.Items.Find(new object[]
+            {
+                item.ItemId
+            });
+            if (item2 != null)
+            {
+                item2.Name = item.Name;
+                item2.Slot = item.Slot;
+                item2.Quality = item.Quality;
+                this.context.SaveChanges();
+            }
+        }
+
+        public void UpdateItemsFromSource()
+        {
+            List<Item> list = this.context.Items.ToList<Item>();
+            foreach (Item current in list)
+            {
+                IWowheadItem itemById = this.wowheadProvider.GetItemById(current.ItemId);
+                if (itemById != null)
+                {
+                    Item item = this.Map(itemById);
+                    item.Sources = this.GetOrCreateSourceIfNotExists(itemById.Sources);
+                    current.Name = item.Name;
+                    current.Quality = item.Quality;
+                    current.Class = item.Class;
+                    current.Subclass = item.Subclass;
+                    current.iLevel = item.iLevel;
+                    current.RequiredLevel = item.RequiredLevel;
+                    current.DisplayId = item.DisplayId;
+                    current.Flags = item.Flags;
+                    current.BuyPrice = item.BuyPrice;
+                    current.SellPrice = item.SellPrice;
+                    current.Sources = item.Sources;
+                }
+            }
+            this.context.SaveChanges();
+        }
+
+        private void UpdateSetAcquiredSlots(int setId, SlotType slot, bool acquired)
+        {
+            Set set = this.context.Sets.Find(new object[]
+            {
+                setId
+            });
+            if (set != null)
+            {
+                CompletedSlots completedSlots = new CompletedSlots(set.CompletedSlots);
+                completedSlots[slot] = acquired;
+                set.CompletedSlots = completedSlots.ToString();
+            }
+        }
+
+        private ICollection<Source> GetOrCreateSourceIfNotExists(IEnumerable<IWowheadItemSource> sources)
+        {
+            IList<Source> list = new List<Source>();
+            if (sources.Any<IWowheadItemSource>())
+            {
+                using (IEnumerator<IWowheadItemSource> enumerator = sources.GetEnumerator())
+                {
+                    while (enumerator.MoveNext())
+                    {
+                        IWowheadItemSource source = enumerator.Current;
+                        Source source3 = this.context.Sources.Local.FirstOrDefault(delegate (Source s)
+                        {
+                            int arg_172_0;
+                            if (new int?((int)s.Type) == source.Type)
+                            {
+                                SourceSubType? subType = s.SubType;
+                                if ((subType.HasValue ? new int?((int)subType.GetValueOrDefault()) : null) == source.SubType && s.WowheadId == source.WowHeadId)
+                                {
+                                    DropLevel? dropLevel = s.DropLevel;
+                                    if ((dropLevel.HasValue ? new int?((int)dropLevel.GetValueOrDefault()) : null) == source.DropLevel)
+                                    {
+                                        arg_172_0 = ((s.ZoneId == source.Zone) ? 1 : 0);
+                                        return arg_172_0 != 0;
+                                    }
+                                }
+                            }
+                            arg_172_0 = 0;
+                            return arg_172_0 != 0;
+                        });
+                        if (source3 == null)
+                        {
+                            source3 = this.context.Sources.FirstOrDefault((Source s) => (int?)((int)s.Type) == source.Type && (int?)((int)s.SubType) == source.SubType && s.WowheadId == source.WowHeadId && (int?)s.DropLevel == source.DropLevel && s.ZoneId == source.Zone);
+                            if (source3 == null)
+                            {
+                                Source source2 = new Source();
+                                source2.Type = (SourceType)source.Type.Value;
+                                Source arg_2D3_0 = source2;
+                                int? num = source.SubType;
+                                arg_2D3_0.SubType = (num.HasValue ? new SourceSubType?((SourceSubType)num.GetValueOrDefault()) : null);
+                                source2.Description = source.Name;
+                                Source arg_31D_0 = source2;
+                                num = source.DropLevel;
+                                arg_31D_0.DropLevel = (num.HasValue ? new DropLevel?((DropLevel)num.GetValueOrDefault()) : null);
+                                source2.WowheadId = source.WowHeadId;
+                                source2.Zone = this.GetOrCreateZone(source.Zone);
+                                source3 = source2;
+                                this.context.Sources.Add(source3);
+                            }
+                        }
+                        list.Add(source3);
+                    }
+                }
+            }
+            else
+            {
+                list = (from s in this.context.Sources
+                        where s.SourceId == 0
+                        select s).ToList<Source>();
+            }
+            return list;
+        }
+
+        private Zone GetOrCreateZone(int? zoneId)
+        {
+            Zone result = null;
+            if (zoneId.HasValue)
+            {
+                Zone zone = this.context.Zones.Local.FirstOrDefault((Zone z) => z.ZoneId == zoneId);
+                if (zone == null)
+                {
+                    zone = this.context.Zones.FirstOrDefault((Zone z) => z.ZoneId == zoneId);
+                    if (zone == null)
+                    {
+                        zone = new Zone
+                        {
+                            ZoneId = new int?(zoneId.Value)
+                        };
+                        this.context.Zones.Add(zone);
+                    }
+                }
+                result = zone;
+            }
+            return result;
+        }
+
+        private Item Map(IWowheadItem wowHeadItem)
+        {
+            return new Item
+            {
+                ItemId        = wowHeadItem.Id,
+                Name          = wowHeadItem.Name,
+                Slot          = this.SlotMapper.Map(wowHeadItem.Slot),
+                Quality       = (QualityType)wowHeadItem.Quality.Value,
+                Class         = wowHeadItem.Class,
+                Subclass      = wowHeadItem.Subclass,
+                iLevel        = wowHeadItem.iLevel,
+                RequiredLevel = wowHeadItem.RequiredLevel,
+                DisplayId     = wowHeadItem.DisplayId,
+                Flags         = wowHeadItem.Flags,
+                BuyPrice      = wowHeadItem.BuyPrice,
+                SellPrice     = wowHeadItem.SellPrice,
+                Acquired      = false
+            };
+        }
+    }
+}
