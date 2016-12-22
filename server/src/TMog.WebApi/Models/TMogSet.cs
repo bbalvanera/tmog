@@ -4,7 +4,7 @@ namespace TMog.WebApi.Models
 {
     public class TMogSet
     {
-        public int TMogSetId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
