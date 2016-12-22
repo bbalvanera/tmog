@@ -3,7 +3,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 const UI_SWITCH_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => UiSwitchComponent),
+    useExisting: forwardRef(() => UiSwitchDirective),
     multi: true
 };
 
@@ -14,7 +14,7 @@ const UI_SWITCH_CONTROL_VALUE_ACCESSOR: any = {
     styleUrls: ['ui-switch.component.css'],
     providers: [UI_SWITCH_CONTROL_VALUE_ACCESSOR]
 })
-export class UiSwitchComponent implements ControlValueAccessor {
+export class UiSwitchDirective implements ControlValueAccessor {
     private _checked: boolean;
     private _disabled: boolean;
     private _reverse: boolean;
