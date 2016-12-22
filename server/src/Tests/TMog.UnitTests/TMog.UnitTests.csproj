@@ -98,7 +98,7 @@
     <Compile Include="Data\TMogDatabaseTests\When_creating_database.cs" />
     <Compile Include="Data\TMogDatabaseTests\When_working_with_sets.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Infrastructure\WowheadSetMapProfileTests\When_initializing_config.cs" />
+    <Compile Include="Services\Infrastructure\WowheadSetMapProfileTests\When_initializing_mapper_config.cs" />
     <Compile Include="Services\Infrastructure\WowheadSetMapProfileTests\When_mapping_from_wowheadItem.cs" />
     <Compile Include="Services\Infrastructure\WowheadSetMapProfileTests\WowheadItem.cs" />
     <Compile Include="Services\Infrastructure\WowheadSetMapProfileTests\WowheadItemSource.cs" />

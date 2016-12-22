@@ -9,7 +9,7 @@ namespace TMog.WebApi.Infrastructure
         public MappingProfile()
         {
             CreateMap<Set, TMogSet>()
-                .ForMember(target => target.TMogSetId, opt => opt.MapFrom(source => source.SetId))
+                .ForMember(target => target.Id, opt => opt.MapFrom(source => source.SetId))
                 .ForMember(target => target.Slots, opt => opt.Ignore())
                 .ForMember(target => target.TotalSlots, opt => opt.ResolveUsing(source =>
                 {
@@ -22,9 +22,14 @@ namespace TMog.WebApi.Infrastructure
                     return slots.CompletedSlotCount;
                 }));
 
-            CreateMap<Entities.Item, Models.Item>();
-            CreateMap<Entities.Source, Models.Source>();
-            CreateMap<Entities.Zone, Models.Zone>();
+            CreateMap<Entities.Item, Models.Item>()
+                .ForMember(target => target.Id, opt => opt.MapFrom(source => source.ItemId));
+
+            CreateMap<Entities.Source, Models.Source>()
+                .ForMember(target => target.Id, opt => opt.MapFrom(source => source.SourceId));
+
+            CreateMap<Entities.Zone, Models.Zone>()
+                .ForMember(target => target.Id, opt => opt.MapFrom(source => source.ZoneId));
         }
     }
 }

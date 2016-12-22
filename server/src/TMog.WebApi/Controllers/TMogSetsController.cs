@@ -59,7 +59,7 @@ namespace TMog.WebApi.Controllers
         {
             var slots = new SlotManager(source.Slots);
 
-            target.TMogSetId = source.SetId;
+            target.Id = source.SetId;
             target.Name = source.Name;
             target.TotalSlots = slots.ActiveSlotCount;
             target.CompletedSlots = slots.CompletedSlotCount;
