@@ -4,22 +4,10 @@ namespace TMog.WowheadApi.Infrastructure
 {
     internal class WowheadSet : IWowheadSet
     {
-        public int WowheadSetId
-        {
-            get;
-            set;
-        }
+        public int WowheadSetId { get; set; }
 
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
-        public IEnumerable<IWowheadItem> Items
-        {
-            get;
-            set;
-        }
+        public IEnumerable<IWowheadItem> Items { get; set; }
     }
 }

@@ -92,8 +92,7 @@ namespace TMog.Services
                 DisplayId     = wowHeadItem.DisplayId,
                 Flags         = wowHeadItem.Flags,
                 BuyPrice      = wowHeadItem.BuyPrice,
-                SellPrice     = wowHeadItem.SellPrice,
-                Acquired      = false
+                SellPrice     = wowHeadItem.SellPrice
             };
         }
 

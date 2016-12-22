@@ -36,6 +36,8 @@ namespace TMog.Data
             set;
         }
 
+        public IDbSet<Location> Locations { get; set; }
+
         public IEnumerable<T> Execute<T>(string name, params object[] parameters)
         {
             return this.Database.SqlQuery<T>(name, parameters);
@@ -43,10 +45,11 @@ namespace TMog.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add<Set>(new SetEntityConfiguration());
-            modelBuilder.Configurations.Add<Item>(new ItemEntityConfiguration());
-            modelBuilder.Configurations.Add<Source>(new SourceEntityConfiguration());
-            modelBuilder.Configurations.Add<Zone>(new ZoneEntityConfiguration());
+            modelBuilder.Configurations.Add(new SetEntityConfiguration());
+            modelBuilder.Configurations.Add(new ItemEntityConfiguration());
+            modelBuilder.Configurations.Add(new SourceEntityConfiguration());
+            modelBuilder.Configurations.Add(new ZoneEntityConfiguration());
+            modelBuilder.Configurations.Add(new LocationEntityConfiguration());
         }
     }
 }
