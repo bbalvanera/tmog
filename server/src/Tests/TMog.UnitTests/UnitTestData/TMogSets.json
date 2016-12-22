@@ -1,0 +1,102 @@
+[
+    {
+        "SetId": 1119,
+        "Name": "Set One",
+        "Slots": "XXXXXXXXXXXX",
+        "Items": [
+            {
+                "ItemId": 1,
+                "Name": "Set One, Item One",
+                "Slot": 1,
+                "Quality": 1,
+                "Sources": [
+                    {
+                        "SourceId": 1,
+                        "Type": 4,
+                        "Description": "Source One",
+                        "Zone": {
+                            "ZoneId": 1,
+                            "Name": "Zone One"
+                        }
+                    },
+                    {
+                        "SourceId": 2,
+                        "Type": 4,
+                        "Description": "Source Two",
+                        "Zone": {
+                            "ZoneId": 1,
+                            "Name": "Zone One"
+                        }
+                    }
+                ]
+            },
+            {
+                "ItemId": 2,
+                "Name": "Set One, Item Two",
+                "Slot": 2,
+                "Quality": 1,
+                "Sources": [
+                    {
+                        "SourceId": 2,
+                        "Type": 4,
+                        "Description": "Source Two",
+                        "Zone": {
+                            "ZoneId": 1,
+                            "Name": "Zone One"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "SetId": 1118,
+        "Name": "Set Two",
+        "Slots": "XXXXXXXXXXXX",
+        "Items": [
+            {
+                "ItemId": 1,
+                "Name": "Set Tow, Item One",
+                "Slot": 1,
+                "Quality": 1,
+                "Sources": [
+                    {
+                        "SourceId": 1,
+                        "Type": 4,
+                        "Description": "Source One",
+                        "Zone": {
+                            "ZoneId": 1,
+                            "Name": "Zone One"
+                        }
+                    },
+                    {
+                        "SourceId": 2,
+                        "Type": 4,
+                        "Description": "Source Two",
+                        "Zone": {
+                            "ZoneId": 1,
+                            "Name": "Zone One"
+                        }
+                    }
+                ]
+            },
+            {
+                "ItemId": 2,
+                "Name": "Set Two, Item Two",
+                "Slot": 2,
+                "Quality": 1,
+                "Sources": [
+                    {
+                        "SourceId": 2,
+                        "Type": 4,
+                        "Description": "Source Two",
+                        "Zone": {
+                            "ZoneId": 1,
+                            "Name": "Zone One"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]
