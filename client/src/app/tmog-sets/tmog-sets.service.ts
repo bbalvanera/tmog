@@ -8,6 +8,7 @@ import { TMogSet } from '../models/tmog-set';
 @Injectable()
 export class TMogSetsService {
     private url = 'api/tmog-sets';
+    private header = new Headers({ 'Content-Type': 'application/json' });
 
     constructor(private http: Http) { }
 
@@ -21,7 +22,7 @@ export class TMogSetsService {
     }
 
     public getById(setId: number): Promise<TMogSet> {
-        var url = this.url + `/${setId}`;
+        const url = this.url + `/${setId}`;
         return this.http.get(url)
             .toPromise()
             .then(response => {
@@ -30,8 +31,14 @@ export class TMogSetsService {
             .catch(this.handleError);
     }
 
-    public saveSet(set: TMogSet): void {
-
+    public saveSet(setId: number): void {
+        const url = this.url;
+        this.http.post(url, setId.toString(), { headers: this.header })
+            .toPromise()
+            .then(response => {
+                response.headers.has('Location');
+            })
+            .catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {

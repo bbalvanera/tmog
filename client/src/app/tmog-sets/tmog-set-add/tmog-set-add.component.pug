@@ -3,7 +3,7 @@
         span(aria-hidden="true") &times;
     h4.modal-title Add new set
 .modal-body
-    form.form-inline(#setIdForm="ngForm", (ngSubmit)="save()", novalidate="")
+    form.form-inline(#setIdForm="ngForm", (ngSubmit)="save()", novalidate)
         button(type="submit", style="display:none")
         .form-group([ngClass]="{ 'has-error': formErrors.setIdInput }")
             input.form-control(

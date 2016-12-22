@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
+import { UiSwitchComponent } from './shared/ui-switch/ui-switch.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuestsComponent } from './quests/quests.component';
 import { components as TMogComponents } from './tmog-sets/components';
@@ -26,6 +27,7 @@ import './rxjs-extensions';
     declarations: [
         AppComponent,
         NavigationComponent,
+        UiSwitchComponent,
         DashboardComponent,
         QuestsComponent,
         ...TMogComponents,
