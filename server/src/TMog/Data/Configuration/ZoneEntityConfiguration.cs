@@ -10,6 +10,8 @@ namespace TMog.Data.Configuration
         {
             HasKey(z => z.ZoneId);
             Property(z => z.ZoneId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
+            HasOptional(z => z.Location).WithMany().Map(m => m.MapKey("LocationId"));
         }
     }
 }

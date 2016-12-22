@@ -4,7 +4,6 @@
 namespace TMog.WebApi.App_Start
 {
     using System;
-    using System.Reflection;
     using System.Web;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
@@ -62,7 +61,7 @@ namespace TMog.WebApi.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Load(Assembly.GetExecutingAssembly());
+            kernel.Load("TMog.WebApi.dll");
         }        
     }
 }

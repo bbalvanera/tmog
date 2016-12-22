@@ -14,6 +14,8 @@ namespace TMog.Data
 
         IDbSet<Zone> Zones { get; }
 
+        IDbSet<Location> Locations { get; }
+
         IEnumerable<T> Execute<T>(string name, params object[] parameters);
 
         int SaveChanges();

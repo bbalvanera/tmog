@@ -32,25 +32,25 @@ namespace TMog.Models
             }
         }
 
-        public int TotalAcquired
-        {
-            get
-            {
-                return Items?.GroupBy(i => i.Acquired).Count() ?? 0;
-            }
-        }
+        //public int TotalAcquired
+        //{
+        //    get
+        //    {
+        //        return Items?.GroupBy(i => i.Acquired).Count() ?? 0;
+        //    }
+        //}
 
-        public int TotalMissing
-        {
-            get
-            {
-                var acquiredItems = Items?.Where(i => i.Acquired);
+        //public int TotalMissing
+        //{
+        //    get
+        //    {
+        //        var acquiredItems = Items?.Where(i => i.Acquired);
 
-                return Items?.Where(i => !acquiredItems.Any(ac => ac.Slot == i.Slot))
-                             .GroupBy(i => i.Slot)
-                             .Count() ?? 0;
-            }
-        }
+        //        return Items?.Where(i => !acquiredItems.Any(ac => ac.Slot == i.Slot))
+        //                     .GroupBy(i => i.Slot)
+        //                     .Count() ?? 0;
+        //    }
+        //}
 
         public SetInfo(Set set)
         {

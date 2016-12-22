@@ -22,7 +22,7 @@ namespace TMog.Business
                 throw new ArgumentNullException(nameof(slots));
             }
 
-            if (slots.Length != GetNumberOfItems())
+            if (slots.Length > GetNumberOfItems())
             {
                 throw new ArgumentException("Invalid slot length");
             }
@@ -44,6 +44,11 @@ namespace TMog.Business
         public bool ContainsSlot(SlotType slot)
         {
             return slots[(int)slot] != "X";
+        }
+
+        public bool IsComplete(SlotType slot)
+        {
+            return this[slot];
         }
 
         public int ActiveSlotCount

@@ -9,7 +9,7 @@ namespace TMog.Data.Configuration
         public ItemEntityConfiguration()
         {
             HasKey(i => i.ItemId).Property(i => i.ItemId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            HasMany(i => i.Sources).WithMany(s => s.Items).Map(config => config.MapLeftKey("ItemId").MapRightKey("SourceId").ToTable("ItemSources"));
+            HasMany(i => i.Sources).WithMany().Map(config => config.MapLeftKey("ItemId").MapRightKey("SourceId").ToTable("ItemSources"));
         }
     }
 }

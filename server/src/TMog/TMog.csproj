@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\bin\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\bin\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -62,6 +66,7 @@
     <Compile Include="Data\Common\Pair.cs" />
     <Compile Include="Data\Common\PairMapper.cs" />
     <Compile Include="Data\Configuration\ItemEntityConfiguration.cs" />
+    <Compile Include="Data\Configuration\LocationEntityConfiguration.cs" />
     <Compile Include="Data\Configuration\SetEntityConfiguration.cs" />
     <Compile Include="Data\Configuration\SourceEntityConfiguration.cs" />
     <Compile Include="Data\Configuration\TMogDbInitializer.cs" />
@@ -75,6 +80,7 @@
     <Compile Include="Entities\DropLevel.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\ItemInfo.cs" />
+    <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\QualityType.cs" />
     <Compile Include="Entities\Set.cs" />
     <Compile Include="Entities\SlotType.cs" />
@@ -82,18 +88,35 @@
     <Compile Include="Entities\SourceSubType.cs" />
     <Compile Include="Entities\SourceType.cs" />
     <Compile Include="Entities\Zone.cs" />
+    <Compile Include="Entities\ZoneType.cs" />
     <Compile Include="Models\ItemsByZone.cs" />
     <Compile Include="Models\ZoneItem.cs" />
     <Compile Include="Models\SetInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DuplicateEntityException.cs" />
+    <Compile Include="Services\Infrastructure\WowZoneMapProfile.cs" />
     <Compile Include="Services\ISetsService.cs">
       <DependentUpon>SetsService.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\ItemsService.cs" />
+    <Compile Include="Services\IZonesService.cs">
+      <DependentUpon>ZonesService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\SetsService.cs" />
+    <Compile Include="Services\ZonesService.cs" />
+    <Compile Include="WowApi\Infrastructure\WowLocation.cs" />
+    <Compile Include="WowApi\Infrastructure\WowZone.cs" />
+    <Compile Include="WowApi\Infrastructure\WowZones.cs" />
+    <Compile Include="WowApi\IWowLocation.cs" />
+    <Compile Include="WowApi\IWowProvider.cs">
+      <DependentUpon>WowProvider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WowApi\IWowZone.cs" />
+    <Compile Include="WowApi\WowProvider.cs" />
+    <Compile Include="WowApi\WowProviderException.cs" />
     <Compile Include="WowheadApi\Infrastructure\ItemXmlData.cs" />
     <Compile Include="WowheadApi\Infrastructure\WowheadItem.cs" />
+    <Compile Include="Services\Infrastructure\WowheadSetMapProfile.cs" />
     <Compile Include="WowheadApi\Infrastructure\WowheadItemSource.cs" />
     <Compile Include="WowheadApi\Infrastructure\WowheadJsonData.cs" />
     <Compile Include="WowheadApi\Infrastructure\WowheadJsonEquipData.cs" />
@@ -101,7 +124,9 @@
     <Compile Include="WowheadApi\Infrastructure\WowheadSet.cs" />
     <Compile Include="WowheadApi\IWowheadItem.cs" />
     <Compile Include="WowheadApi\IWowheadItemSource.cs" />
-    <Compile Include="WowheadApi\IWowheadProvider.cs" />
+    <Compile Include="WowheadApi\IWowheadProvider.cs">
+      <DependentUpon>WowheadProvider.cs</DependentUpon>
+    </Compile>
     <Compile Include="WowheadApi\IWowheadSet.cs" />
     <Compile Include="WowheadApi\WowheadProvider.cs" />
     <Compile Include="WowheadApi\WowheadProviderException.cs" />

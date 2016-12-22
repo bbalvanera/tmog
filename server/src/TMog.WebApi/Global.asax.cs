@@ -8,6 +8,7 @@ namespace TMog.WebApi
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
             JsonConfig.Register(GlobalConfiguration.Configuration.Formatters.JsonFormatter);
+            AutoMapperConfig.Configure();
         }
     }
 }
