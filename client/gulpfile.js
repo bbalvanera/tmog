@@ -18,7 +18,7 @@ const merge      = require('merge-stream');
 const path       = require('path');
 
 let initialized = false;
-let pugOptions = { pretty: true };
+let pugOptions = { pretty: true, doctype: 'html' };
 let mincss = gutil.noop;
 let minjs = gutil.noop;
 
@@ -77,6 +77,10 @@ gulp.task('config', () => {
 });
 
 gulp.task('clean', ['config'], () => {
+    if (args.nodelete) {
+        return;
+    }
+
     return del(src.deletables);
 });
 
@@ -208,7 +212,8 @@ function configureTsBuild(src, dest, base) {
         .pipe(sourcemaps.init())
         .pipe(ts({
             emitDecoratorMetadata: true,
-            experimentalDecorators: true
+            experimentalDecorators: true,
+            target: 'es5'
         }))
         .js
         .pipe(sourcemaps.write('.'))

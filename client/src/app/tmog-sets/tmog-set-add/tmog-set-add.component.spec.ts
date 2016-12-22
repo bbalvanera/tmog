@@ -35,7 +35,7 @@ describe('TMogSetAddComponent', () => {
         });
 
         it('should set error message if invalid input', () => {
-            component.setId = "invalid input";
+            component.setId = 'invalid input';
 
             component.save();
 
