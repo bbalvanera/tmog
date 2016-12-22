@@ -13,7 +13,7 @@ namespace TMog.UnitTests.WowheadApi
             [TestMethod]
             public async Task should_return_null_if_invalid_id()
             {
-                var result = await system.GetItemById(0);
+                var result = await Subject.GetItemById(0);
 
                 Assert.IsNull(result);    
             }
@@ -23,7 +23,7 @@ namespace TMog.UnitTests.WowheadApi
             {
                 var itemid = 27447;
 
-                var result = await system.GetItemById(itemid);
+                var result = await Subject.GetItemById(itemid);
 
                 Assert.IsNotNull(result);
                 Assert.IsNull(result.BuyPrice);
@@ -54,7 +54,7 @@ namespace TMog.UnitTests.WowheadApi
             {
                 var itemid = 122558;
 
-                var result = await system.GetItemById(itemid);
+                var result = await Subject.GetItemById(itemid);
 
                 Assert.IsNotNull(result);
             }
@@ -64,7 +64,7 @@ namespace TMog.UnitTests.WowheadApi
             {
                 var itemid = 1337;
 
-                var result = await system.GetItemById(itemid);
+                var result = await Subject.GetItemById(itemid);
 
                 Assert.IsNull(result);
             }
@@ -99,7 +99,7 @@ namespace TMog.UnitTests.WowheadApi
 
         public class WowheadProviderTesterHelper : SystemUnderTestHelper<WowheadProvider>
         {
-            protected override WowheadProvider GetSystem()
+            protected override WowheadProvider GetSubject()
             {
                 return new WowheadProvider();
             }

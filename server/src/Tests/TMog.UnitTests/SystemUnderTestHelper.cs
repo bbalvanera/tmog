@@ -4,20 +4,20 @@ namespace TMog.UnitTests
 {
     public abstract class SystemUnderTestHelper<T>
     {
-        protected T system;
+        public T Subject { get; set; }
 
         [TestInitialize]
         public virtual void TestInitialize()
         {
-            system = GetSystem();
+            Subject = GetSubject();
         }
 
         [TestCleanup]
         public virtual void TestCleanup()
         {
-            system = default(T);
+            Subject = default(T);
         }
 
-        protected abstract T GetSystem();
+        protected abstract T GetSubject();
     }
 }
