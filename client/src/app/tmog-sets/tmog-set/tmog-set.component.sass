@@ -5,7 +5,12 @@ table
     transition: height 2s
 
 td
-    width: 50%;
+    &.first
+        width: 40%;
+    &.middle
+        width: 20%;
+    &.last
+        width: 40%;
 
 .table>thead>tr>th /* required to override bootstrap */
     vertical-align: middle;

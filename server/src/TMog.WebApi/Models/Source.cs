@@ -6,7 +6,11 @@
 
         public string Type { get; set; }
 
+        public string SubType { get; set; }
+
         public string Description { get; set; }
+
+        public int? WowheadId { get; set; }
 
         public Zone Zone { get; set; }
     }

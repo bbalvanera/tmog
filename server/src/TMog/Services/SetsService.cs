@@ -12,10 +12,10 @@ namespace TMog.Services
 {
     public class SetsService : ISetsService
     {
-        private readonly ITMogDatabase db;
+        private readonly TMogDatabase db;
         private readonly IWowheadProvider wowheadProvider;
 
-        public SetsService(ITMogDatabase db, IWowheadProvider wowheadProvider)
+        public SetsService(TMogDatabase db, IWowheadProvider wowheadProvider)
         {
             this.db = db;
             this.wowheadProvider = wowheadProvider;
@@ -29,7 +29,7 @@ namespace TMog.Services
         public async Task<Set> GetById(int setId)
         {
             return await db.Sets
-                .Include(s => s.Items.Select(i => i.Sources.Select(src => src.Zone)))
+                .Include(s => s.Items.Select(i => i.Source.Zone.Location))
                 .FirstOrDefaultAsync(s => s.SetId == setId);
         }
 
@@ -40,7 +40,7 @@ namespace TMog.Services
                 throw new ArgumentException($"Invalid set id: {setId}");
             }
 
-            var existing = db.Sets.Find(setId);
+            var existing = await GetById(setId);
             if (existing != null)
             {
                 return existing;
@@ -55,14 +55,14 @@ namespace TMog.Services
 
             if (wowheadSet == null)
             {
-                return null;
+                throw new ArgumentException("Invalid set id");
             }
 
             var set = Mapper.Map<Set>(wowheadSet);
             set.Items = wowheadSet.Items.Select(i =>
             {
-                Item item    = Mapper.Map<Item>(i);
-                item.Sources = GetOrCreateSourceIfNotExists(i.Sources);
+                Item item   = GetOrCreateItem(i);
+                item.Source = GetOrCreateSource(i.Sources);
 
                 return item;
             }).ToList();
@@ -73,43 +73,46 @@ namespace TMog.Services
             return set;
         }
 
-        private List<Source> GetOrCreateSourceIfNotExists(IEnumerable<IWowheadItemSource> sources)
+        private Item GetOrCreateItem(IWowheadItem i)
         {
-            var list = new List<Source>();
-            if (sources.Any())
+            return db.Items.Find(i.Id) ?? Mapper.Map<Item>(i);
+        }
+
+        private Source GetOrCreateSource(IEnumerable<IWowheadItemSource> sources)
+        {
+            var source = sources.FirstOrDefault();
+
+            if (source == null)
             {
-                foreach (var source in sources)
+                return null;
+            }
+
+            // search in memory first
+            var existing = db.Sources.Local.FirstOrDefault(s => source.Type == (int)s.Type &&
+                                                                source.SubType == (int?)s.SubType &&
+                                                                source.WowheadId == s.WowheadId &&
+                                                                source.DropLevel == (int?)s.DropLevel);
+
+            if (existing == null)
+            {
+                // search in db
+                existing = db.Sources.FirstOrDefault(s => source.Type == (int)s.Type &&
+                                                          source.SubType == (int?)s.SubType &&
+                                                          source.WowheadId == s.WowheadId &&
+                                                          source.DropLevel == (int?)s.DropLevel);
+
+                // source does not exist and needs to be created
+                if (existing == null)
                 {
-                    // search in memory first
-                    var existing = db.Sources.Local.FirstOrDefault(s => source.Type == (int)s.Type &&
-                                                                        source.SubType == (int?)s.SubType &&
-                                                                        source.WowheadId == s.WowheadId &&
-                                                                        source.DropLevel == (int?)s.DropLevel);
+                    var newSource = Mapper.Map<Source>(source);
+                    newSource.Zone = GetOrCreateZone(source.Zone);
 
-                    if (existing == null)
-                    {
-                        // search in db
-                        existing = db.Sources.FirstOrDefault(s => source.Type == (int)s.Type &&
-                                                                  source.SubType == (int?)s.SubType &&
-                                                                  source.WowheadId == s.WowheadId &&
-                                                                  source.DropLevel == (int?)s.DropLevel);
-
-                        // source does not exist and needs to be created
-                        if (existing == null)
-                        {
-                            var newSource  = Mapper.Map<Source>(source);
-                            newSource.Zone = GetOrCreateZone(source.Zone);
-
-                            db.Sources.Add(newSource);
-                            existing = newSource;
-                        }
-                    }
-
-                    list.Add(existing);
+                    db.Sources.Add(newSource);
+                    existing = newSource;
                 }
             }
 
-            return list;
+            return existing;
         }
 
         private Zone GetOrCreateZone(int? zoneId)
@@ -119,6 +122,7 @@ namespace TMog.Services
             {
                 result = db.Zones.Find(zoneId.Value) ?? db.Zones.Add(new Zone { ZoneId = zoneId });
             }
+
             return result;
         }
     }

@@ -7,7 +7,7 @@ namespace TMog.UnitTests.Services.SetsServiceTests
     public class SetsServiceTestHelper
     {
 
-        protected SetsService GetSubject(ITMogDatabase database, IWowheadProvider wowheadProvider = null)
+        protected SetsService GetSubject(TMogDatabase database, IWowheadProvider wowheadProvider = null)
         {
             return new SetsService(database, wowheadProvider);
         }

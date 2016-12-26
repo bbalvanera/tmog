@@ -12,6 +12,7 @@ namespace TMog.Entities
         Pvp,
         Quest,
         Vendors,
+        Achievement = 12,
         [Display(Name = "Black Market")]
         BlackMarket = 14,
         Fished = 16

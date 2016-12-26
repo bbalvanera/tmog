@@ -2,13 +2,14 @@
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { TMogSetsService } from '../tmog-sets.service';
+import { TMogSetsCacheService } from '../tmog-sets-cache.service';
 
 @Component({
     moduleId: module.id,
     selector: 'tmog-set-add',
     templateUrl: './tmog-set-add.component.html',
     styleUrls: ['tmog-set-add.component.css'],
-    providers: [TMogSetsService]
+    providers: [TMogSetsService, TMogSetsCacheService]
 })
 export class TMogSetAddComponent {
     public setId: string;
@@ -24,7 +25,14 @@ export class TMogSetAddComponent {
         }
 
         try {
-            this.tmogSetsService.saveSet(parseInt(this.setId, 10));
+            this.tmogSetsService.createSet(+this.setId)
+                .then(success => {
+                    this.modal.close({ ok: true, tmogSetId: this.setId });
+                }, error => {
+                    if (error.status === 461) {
+                        this.formErrors.setIdInput = 'The requested transmog set doesn\'t exist.';
+                    }
+                });
         }
         catch (e) {
             console.log(e);
@@ -32,8 +40,8 @@ export class TMogSetAddComponent {
     }
 
     private isValid(value: string): boolean {
-        const result = parseInt(this.setId, 10);
-        if (Number.isNaN(result) || result <= 0) {
+        const digits = /^[0-9]+$/;
+        if (!this.setId.match(digits)) {
             this.formErrors.setIdInput = 'Please type a valid set id.';
             return false;
         }

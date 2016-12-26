@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'quests', component: QuestsComponent },
   { path: 'tmog-sets', component: TMogSetsComponent },
-  { path: 'tmog-set', component: TMogSetComponent }
+  { path: 'tmog-set/:id', component: TMogSetComponent }
 ];
 
 @NgModule({

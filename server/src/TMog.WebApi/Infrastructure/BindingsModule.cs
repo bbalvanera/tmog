@@ -15,10 +15,11 @@ namespace TMog.WebApi.Infrastructure
             // data
             Bind<IWowheadProvider>().To<WowheadProvider>();
             Bind<IWowProvider>().To<WowProvider>();
-            Bind<ITMogDatabase>().To<TMogDatabase>();
+            Bind<TMogDatabase>().ToSelf();
 
             // services
             Bind<ISetsService>().To<SetsService>();
+            Bind<IZonesService>().To<ZonesService>();
 
             SetAutoMapperBindings();
         }

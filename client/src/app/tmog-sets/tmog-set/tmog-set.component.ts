@@ -1,52 +1,33 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { TMogSetsService } from '../tmog-sets.service';
+import { TMogSetsCacheService } from '../tmog-sets-cache.service';
+import { TMogSet } from '../../core/models';
 
 @Component({
   moduleId: module.id,
   selector: 'tmog-set',
   templateUrl: 'tmog-set.component.html',
-  styleUrls: ['tmog-set.component.css']
+  styleUrls: ['tmog-set.component.css'],
+  providers: [TMogSetsService, TMogSetsCacheService]
 })
-export class TMogSetComponent {
-    public slots: any = [
-        {
-            name: 'Head',
-            complete: false,
-            items: [
-                {
-                    name: 'Helm of Might',
-                    source: 'Unavailable'
-                },
-                {
-                    name: 'Burnished Helm of Might',
-                    source: 'Vendor, Achievement'
-                },
-                {
-                    name: 'Faceguard of the Crown',
-                    source: 'A Dangerous Alliance'
-                }
-            ]
-        },
-        {
-            name: 'Shoulder',
-            complete: true,
-            items: [
-                {
-                    name: 'Burnished Pauldrons of Might',
-                    source: {
-                        description: 'Unavailable',
-                        zone: {
-                            id: 1,
-                            name: 'Molten Core'
-                        }
-                    }
-                },
-                {
-                    name: 'Burnished Pauldrons of Might',
-                    source: {
-                        description: 'Vendors'
-                    }
-                }
-            ]
-        }
-    ];
+export class TMogSetComponent implements OnInit {
+
+    public model: any = {};
+
+    constructor(private route: ActivatedRoute, private tmogSetsService: TMogSetsService) {
+
+    }
+
+    public ngOnInit(): void {
+        this.route.params.forEach(params => {
+            let id = +params['id'];
+            this.tmogSetsService
+                .getById(id)
+                .then(result => {
+                    this.model = result;
+                });
+        });
+    }
 }

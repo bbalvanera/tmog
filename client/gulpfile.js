@@ -44,6 +44,7 @@ const src = {
         js: [
           'node_modules/@angular/**/*',
           'node_modules/@ng-bootstrap/**/*',
+          'node_modules/angular-2-local-storage/dist/**/*',
           'node_modules/zone.js/**/*',
           'node_modules/reflect-metadata/**/*',
           'node_modules/systemjs/**/*',
@@ -77,7 +78,8 @@ gulp.task('config', () => {
 });
 
 gulp.task('clean', ['config'], () => {
-    if (args.nodelete) {
+    if (!args.clean) {
+        log('no cleaning');
         return;
     }
 

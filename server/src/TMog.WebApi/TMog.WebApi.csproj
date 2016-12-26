@@ -121,9 +121,9 @@
     <Compile Include="App_Start\JsonConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\Default1Controller.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\TMogSetsController.cs" />
+    <Compile Include="Controllers\ZonesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
