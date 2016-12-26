@@ -8,7 +8,6 @@ namespace TMog.Data.Configuration
         public SourceEntityConfiguration()
         {
             HasKey(s => s.SourceId);
-            // HasMany(s => s.Items);
         }
     }
 }

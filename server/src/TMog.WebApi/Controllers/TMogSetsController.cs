@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using AutoMapper;
@@ -32,15 +35,8 @@ namespace TMog.WebApi.Controllers
             var set = await service.GetById(id);
             if (set != null)
             {
-                var slotMan  = new SlotManager(set.Slots);
-                var tmogSet  = Mapper.Map<TMogSet>(set);
-                tmogSet.Slots = set.Items.GroupBy(i => i.Slot).Select(i => new Slot
-                {
-                    Name      = i.Key.ToString(),
-                    Items     = Mapper.Map<IEnumerable<Item>>(i),
-                    Completed = slotMan.IsComplete(i.Key)
-                });
-                
+                TMogSet tmogSet = Map(set);
+
                 return Ok(tmogSet);
             }
 
@@ -50,27 +46,35 @@ namespace TMog.WebApi.Controllers
         [Route("")]
         public async Task<IHttpActionResult> Post([FromBody] int id)
         {
-            var set = await service.Create(id);
+            try
+            {
+                var set = await service.Create(id);
+                
+                return CreatedAtRoute("tmog-sets", new { id = id }, Map(set));
+            }
+            catch (ArgumentException)
+            {
+                var responseMessage = new HttpResponseMessage
+                {
+                    StatusCode = (HttpStatusCode)461,
+                    ReasonPhrase = "Invalid set id"
+                };
 
-            return CreatedAtRoute("tmog-sets", new { id = id }, set);
+                return ResponseMessage(responseMessage);
+            }
         }
 
-        private void MapAsListItem(Entities.Set source, TMogSet target)
+        private static TMogSet Map(Entities.Set set)
         {
-            var slots = new SlotManager(source.Slots);
-
-            target.Id = source.SetId;
-            target.Name = source.Name;
-            target.TotalSlots = slots.ActiveSlotCount;
-            target.CompletedSlots = slots.CompletedSlotCount;
-        }
-
-        private void MapAsDetail(Entities.Set source, TMogSet target)
-        {
-            MapAsListItem(source, target);
-            // group items by slot
-            var result = source.Items.GroupBy(i => i.Slot);
-
+            var slotMan   = new SlotManager(set.Slots);
+            var tmogSet   = Mapper.Map<TMogSet>(set);
+            tmogSet.Slots = set.Items.GroupBy(i => i.Slot).Select(i => new Slot
+            {
+                Name      = i.Key.ToString(),
+                Items     = Mapper.Map<IEnumerable<Item>>(i),
+                Completed = slotMan.IsComplete(i.Key)
+            });
+            return tmogSet;
         }
     }
 }

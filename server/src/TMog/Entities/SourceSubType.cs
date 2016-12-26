@@ -17,6 +17,8 @@ namespace TMog.Entities
         [Display(Name = "quest")]
         Quest,
         [Display(Name = "spell")]
-        Spell
+        Spell,
+        [Display(Name = "achievement")]
+        Achievement = 10
     }
 }

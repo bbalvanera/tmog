@@ -36,6 +36,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "client(1)", "client\", "{0E
 		SlnRelativePath = "client\"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMog.TypescriptGenerator", "server\src\TMog.TypescriptGenerator\TMog.TypescriptGenerator.csproj", "{670A7CC4-BC8E-4ED6-AB12-C01F94B8F5C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{0EAD25F4-F01A-4031-8EA8-02CE5B27C44B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0EAD25F4-F01A-4031-8EA8-02CE5B27C44B}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{0EAD25F4-F01A-4031-8EA8-02CE5B27C44B}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{670A7CC4-BC8E-4ED6-AB12-C01F94B8F5C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{670A7CC4-BC8E-4ED6-AB12-C01F94B8F5C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{670A7CC4-BC8E-4ED6-AB12-C01F94B8F5C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{670A7CC4-BC8E-4ED6-AB12-C01F94B8F5C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,5 +73,6 @@ Global
 		{469BAFFE-6A8A-46E6-A6F0-B42E6E8C2F2E} = {682C2437-AFD3-4873-BC3A-10528276240E}
 		{F8058B1A-9403-4650-8B09-4CB380CC2EE5} = {682C2437-AFD3-4873-BC3A-10528276240E}
 		{0EAD25F4-F01A-4031-8EA8-02CE5B27C44B} = {C4F7C394-9AB5-43EF-8C46-7705DDC0DDFC}
+		{670A7CC4-BC8E-4ED6-AB12-C01F94B8F5C3} = {682C2437-AFD3-4873-BC3A-10528276240E}
 	EndGlobalSection
 EndGlobal

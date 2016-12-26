@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 import { TMogSetsService } from './tmog-sets.service';
-import { TMogSet } from '../models/tmog-set';
+import { TMogSetsCacheService } from './tmog-sets-cache.service';
+import { TMogSet } from '../core/models';
 import { TMogSetAddComponent } from './tmog-set-add/tmog-set-add.component';
 
 @Component({
@@ -10,12 +12,13 @@ import { TMogSetAddComponent } from './tmog-set-add/tmog-set-add.component';
     selector: 'tmog-sets',
     templateUrl: 'tmog-sets.component.html',
     styleUrls: ['tmog-sets.component.css'],
-    providers: [TMogSetsService]
+    providers: [TMogSetsService, TMogSetsCacheService]
 })
 export class TMogSetsComponent implements OnInit {
     public tmogSets: TMogSet[];
+    public error: { shortText: string, message: string };
 
-    constructor(private tmogSetsService: TMogSetsService, private modalService: NgbModal) { }
+    constructor(private tmogSetsService: TMogSetsService, private modalService: NgbModal, private router: Router) { }
 
     public ngOnInit(): void {
         this.populateSets();
@@ -27,9 +30,9 @@ export class TMogSetsComponent implements OnInit {
         };
 
         this.modalService.open(TMogSetAddComponent, options).result.then(result => {
-            console.log(`Closed with ${result}`);
-        }, reason => {
-            console.log(`Dismissed ${reason}`);
+            if (result.ok) {
+                this.router.navigate(['tmog-set', result.tmogSetId]);
+            }
         });
     }
 
@@ -43,11 +46,33 @@ export class TMogSetsComponent implements OnInit {
         return missingSlots > 0 && missingSlots <= 4;
     }
 
-    private populateSets() {
+    public dismissTooltip(): void {
+        // this is necessary because, the tooltip won't hide after transition.
+        if ($WH && $WH.Tooltip) {
+            if ($WH.Tooltip.showingTooltip) {
+                $WH.Tooltip.hide();
+            }
+        }
+    }
+
+    private populateSets(): void {
         this.tmogSetsService
             .getAll()
             .then(results => {
                 this.tmogSets = results;
+            }, reason => {
+                if (reason.status === 500) {
+                    this.error = {
+                        shortText: 'Our apologies :(',
+                        message: 'We tried. We really did. But looks like something is wrong with our server. We\'ll fix it. We promise.'
+                    };
+                }
+                else {
+                    this.error = {
+                        shortText: 'Oh Snap!',
+                        message: 'Looks like something went really really wrong. We\'ll fix it. We promise.'
+                    };
+                }
             });
     }
 }

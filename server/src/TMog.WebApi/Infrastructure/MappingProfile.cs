@@ -1,4 +1,5 @@
 ﻿using TMog.Business;
+using TMog.Common;
 using TMog.Entities;
 using TMog.WebApi.Models;
 
@@ -16,7 +17,7 @@ namespace TMog.WebApi.Infrastructure
                     var slots = new SlotManager(source.Slots);
                     return slots.ActiveSlotCount;
                 }))
-                .ForMember(target => target.CompletedSlots, opt => opt.ResolveUsing(source => 
+                .ForMember(target => target.CompletedSlots, opt => opt.ResolveUsing(source =>
                 {
                     var slots = new SlotManager(source.Slots);
                     return slots.CompletedSlotCount;
@@ -26,10 +27,12 @@ namespace TMog.WebApi.Infrastructure
                 .ForMember(target => target.Id, opt => opt.MapFrom(source => source.ItemId));
 
             CreateMap<Entities.Source, Models.Source>()
-                .ForMember(target => target.Id, opt => opt.MapFrom(source => source.SourceId));
+                .ForMember(target => target.Id, opt => opt.MapFrom(source => source.SourceId))
+                .ForMember(target => target.SubType, opt => opt.ResolveUsing(source => source.SubType?.GetDisplayValue()));
 
             CreateMap<Entities.Zone, Models.Zone>()
-                .ForMember(target => target.Id, opt => opt.MapFrom(source => source.ZoneId));
+                .ForMember(target => target.Id, opt => opt.MapFrom(source => source.ZoneId))
+                .ForMember(target => target.LocationId, opt => opt.ResolveUsing(source => source.Location?.LocationId));
         }
     }
 }

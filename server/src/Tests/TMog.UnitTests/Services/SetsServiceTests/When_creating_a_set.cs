@@ -27,7 +27,7 @@ namespace TMog.UnitTests.Services.SetsServiceTests
         {
             var data     = new List<Source>();
             var sources  = SetupDbSet(data);
-            var database = new Mock<ITMogDatabase>();
+            var database = new Mock<TMogDatabase>();
             database.Setup(db => db.Sets.Find(It.IsAny<object>())).Returns((Set)null);
             database.Setup(db => db.Zones.Find(It.IsAny<object>())).Returns(new Zone { ZoneId = 1 });
             database.Setup(db => db.Sources).Returns(sources.Object);
@@ -45,7 +45,7 @@ namespace TMog.UnitTests.Services.SetsServiceTests
         [TestMethod]
         public async Task should_not_create_duplicates()
         {
-            var database = new Mock<ITMogDatabase>();
+            var database = new Mock<TMogDatabase>();
             database.Setup(db => db.Sets.Find(It.IsAny<object>())).Returns(new Set { SetId = 1119 });
             var subject = GetSubject(database.Object);
 
@@ -60,7 +60,7 @@ namespace TMog.UnitTests.Services.SetsServiceTests
         [TestMethod]
         public async Task should_return_instance_after_create()
         {
-            var database = new Mock<ITMogDatabase>();
+            var database = new Mock<TMogDatabase>();
             database.Setup(db => db.Sets.Find(It.IsAny<object>())).Returns(new Set { SetId = 1119 });
             var subject = GetSubject(database.Object);
 
@@ -74,7 +74,7 @@ namespace TMog.UnitTests.Services.SetsServiceTests
         public async Task shoud_throw_if_invalid_id()
         {
             var id = 0;
-            var subject = GetSubject(new Mock<ITMogDatabase>().Object);
+            var subject = GetSubject(new Mock<TMogDatabase>().Object);
 
             await subject.Create(id);
         }

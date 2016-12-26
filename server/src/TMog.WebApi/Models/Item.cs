@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TMog.WebApi.Models
+﻿namespace TMog.WebApi.Models
 {
     public class Item
     {
@@ -8,6 +6,8 @@ namespace TMog.WebApi.Models
 
         public string Name { get; set; }
 
-        public IEnumerable<Source> Sources { get; set; }
+        public int? Quality { get; set; }
+
+        public Source Source { get; set; }
     }
 }

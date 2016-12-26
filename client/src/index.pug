@@ -11,13 +11,10 @@ html
     script(src="external/zone.js/dist/zone.min.js")
     script(src="external/reflect-metadata/Reflect.js")
     script(src="external/systemjs/dist/system.js")
-    //script(src="external/jquery/dist/jquery.min.js")
-    //script(src="external/bootstrap/dist/js/bootstrap.min.js")
     script(src="app/systemjs.config.js")
     script(src="//wow.zamimg.com/widgets/power.js")
-    script
-     | System.import('app').catch(function(err) { console.error(err); });
-     | var wowhead_tooltips = { "colorlinks": true, "iconizelinks": false, "renamelinks": false }
+    script var wowhead_tooltips = { "colorlinks": true, "iconizelinks": false, "renamelinks": false }
+    script System.import('app').catch(function(err) { console.error(err); });
 
   body
     app Loading...

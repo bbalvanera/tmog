@@ -10,7 +10,6 @@ namespace TMog.Data.Configuration
         {
             HasKey(l => l.LocationId);
             Property(l => l.LocationId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
         }
     }
 }

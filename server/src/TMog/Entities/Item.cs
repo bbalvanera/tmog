@@ -28,6 +28,6 @@ namespace TMog.Entities
 
         public long? SellPrice { get; set; }
 
-        public ICollection<Source> Sources { get; set; }
+        public Source Source { get; set; }
     }
 }

@@ -9,10 +9,10 @@ namespace TMog.Services
 {
     public class ZonesService : IZonesService
     {
-        private readonly ITMogDatabase db;
+        private readonly TMogDatabase db;
         private readonly IWowProvider wowProvider;
 
-        public ZonesService(ITMogDatabase db, IWowProvider wowProvider)
+        public ZonesService(TMogDatabase db, IWowProvider wowProvider)
         {
             this.db = db;
             this.wowProvider = wowProvider;

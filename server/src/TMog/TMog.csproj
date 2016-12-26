@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\EnumHelper.cs" />
     <Compile Include="Common\Pair.cs" />
     <Compile Include="Common\PairMapper.cs" />
     <Compile Include="Data\Common\Pair.cs" />
