@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using AutoMapper;
-using TMog.Business;
 using TMog.Services;
+using TMog.WebApi.Common;
 using TMog.WebApi.Models;
 
 namespace TMog.WebApi.Controllers
@@ -23,10 +20,12 @@ namespace TMog.WebApi.Controllers
         }
 
         [Route("")]
-        public async Task<IEnumerable<TMogSet>> Get()
+        public async Task<IHttpActionResult> Get()
         {
             var results = await service.GetAll();
-            return Mapper.Map<IEnumerable<TMogSet>>(results);
+            var mapped  = Mapper.Map<IEnumerable<TMogSet>>(results);
+
+            return Ok(mapped);
         }
 
         [Route("{id:int}", Name = "tmog-sets")]
@@ -35,7 +34,8 @@ namespace TMog.WebApi.Controllers
             var set = await service.GetById(id);
             if (set != null)
             {
-                TMogSet tmogSet = Map(set);
+
+                TMogSet tmogSet = TMogSetMapper.FromSet(set);
 
                 return Ok(tmogSet);
             }
@@ -49,32 +49,56 @@ namespace TMog.WebApi.Controllers
             try
             {
                 var set = await service.Create(id);
-                
-                return CreatedAtRoute("tmog-sets", new { id = id }, Map(set));
-            }
-            catch (ArgumentException)
-            {
-                var responseMessage = new HttpResponseMessage
-                {
-                    StatusCode = (HttpStatusCode)461,
-                    ReasonPhrase = "Invalid set id"
-                };
 
-                return ResponseMessage(responseMessage);
+                return Created($"tmog-sets/{id}", "");
+            }
+            catch (ArgumentException ex)
+            {
+                if (ex.ParamName == "setId")
+                {
+                    return BadRequest("461");
+                }
+
+                throw;
             }
         }
 
-        private static TMogSet Map(Entities.Set set)
+        [Route("")]
+        public async Task<IHttpActionResult> Delete([FromBody] int id)
         {
-            var slotMan   = new SlotManager(set.Slots);
-            var tmogSet   = Mapper.Map<TMogSet>(set);
-            tmogSet.Slots = set.Items.GroupBy(i => i.Slot).Select(i => new Slot
+            if (id > 0)
             {
-                Name      = i.Key.ToString(),
-                Items     = Mapper.Map<IEnumerable<Item>>(i),
-                Completed = slotMan.IsComplete(i.Key)
-            });
-            return tmogSet;
+                await service.Delete(id);
+            }
+
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("{id:int}/slot/{slot}")]
+        public async Task<IHttpActionResult> UpdateSlotCompletion(int id, string slot, [FromBody] string status)
+        {
+            Entities.SlotType slotType;
+            if (!Enum.TryParse(slot, true, out slotType))
+            {
+                return BadRequest("Invalid slot");
+            }            
+
+            try
+            {
+                await service.MarkSetSlotCompletionStatus(id, slotType, status != "false");
+            }
+            catch (ArgumentException ex)
+            {
+                if (ex.ParamName == "setId")
+                {
+                    return BadRequest(ex.Message);
+                }
+
+                throw;
+            }
+
+            return Ok();
         }
     }
 }

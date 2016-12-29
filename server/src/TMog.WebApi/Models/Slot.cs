@@ -6,7 +6,7 @@ namespace TMog.WebApi.Models
     {
         public string Name { get; set; }
 
-        public bool Completed { get; set; }
+        public bool Complete { get; set; }
 
         public IEnumerable<Item> Items { get; set; }
     }

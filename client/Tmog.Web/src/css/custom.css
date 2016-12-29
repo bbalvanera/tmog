@@ -1,0 +1,53 @@
+html {
+    overflow-y: scroll;
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+
+    .main-container {
+        width: 768px;
+    }
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-shadow: 2px 2px 1px rgba(0,0,0,.4);
+}
+
+table {
+    background-color: transparent;
+}
+
+    table.table {
+        background-color: #2e3338;
+    }
+
+.loading-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000000;
+}
+
+    .loading-backdrop.fade {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+
+    .loading-backdrop.in {
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+    }
+
+.glyphicon.input-group-addon {
+    top: 0;
+}

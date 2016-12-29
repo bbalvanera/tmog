@@ -13,7 +13,7 @@ namespace TMog.Data.Configuration
             Property(s => s.Name).IsRequired();
             Property(s => s.SetId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            HasMany(s => s.Items).WithMany().Map(config => config.MapLeftKey("SetId").MapRightKey("ItemId").ToTable("SetItems"));
+            HasMany(s => s.Items).WithMany(i => i.Sets).Map(config => config.MapLeftKey("SetId").MapRightKey("ItemId").ToTable("SetItems"));
         }
     }
 }

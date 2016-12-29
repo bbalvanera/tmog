@@ -61,6 +61,11 @@ namespace TMog.Business
             get { return slots.Count(s => s == "1"); }
         }
 
+        public void Mark(SlotType slot, bool complete)
+        {
+            this[slot] = complete;
+        }
+
         public override string ToString()
         {
             return string.Join("", this.slots);

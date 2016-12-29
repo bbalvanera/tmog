@@ -95,6 +95,9 @@
     <Compile Include="Models\SetInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DuplicateEntityException.cs" />
+    <Compile Include="Services\IItemsService.cs">
+      <DependentUpon>ItemsService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\Infrastructure\WowZoneMapProfile.cs" />
     <Compile Include="Services\ISetsService.cs">
       <DependentUpon>SetsService.cs</DependentUpon>

@@ -1,4 +1,6 @@
-﻿namespace TMog.WebApi.Models
+﻿using System.Collections.Generic;
+
+namespace TMog.WebApi.Models
 {
     public class Item
     {
@@ -9,5 +11,7 @@
         public int? Quality { get; set; }
 
         public Source Source { get; set; }
+
+        public IEnumerable<TMogSet> Sets { get; set; }
     }
 }

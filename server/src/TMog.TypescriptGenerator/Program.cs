@@ -19,7 +19,10 @@ namespace TMog.TypescriptGenerator
                 
                 .WithModuleNameFormatter(module => "")
                 .WithVisibility((tsClass, type) => true)
-                .WithMemberFormatter(identifier => char.ToLower(identifier.Name[0]) + identifier.Name.Substring(1))
+                .WithMemberFormatter(identifier => {
+                    identifier.IsOptional = true;
+                    return char.ToLower(identifier.Name[0]) + identifier.Name.Substring(1);
+                })
                 .WithIndentation("  ")
                 .Generate(TsGeneratorOutput.Enums | TsGeneratorOutput.Fields | TsGeneratorOutput.Properties);
 

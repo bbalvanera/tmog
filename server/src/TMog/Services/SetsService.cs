@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using TMog.Business;
 using TMog.Data;
 using TMog.Entities;
 using TMog.WowheadApi;
@@ -49,13 +50,39 @@ namespace TMog.Services
             return await GetSet(setId);
         }
 
+        public async Task MarkSetSlotCompletionStatus(int setId, SlotType slot, bool completed)
+        {
+            var set = db.Sets.Find(setId);
+
+            if (set == null)
+            {
+                throw new ArgumentException("Invalid set", nameof(setId));
+            }
+
+            SlotManager slotMan = new SlotManager(set.Slots);
+            slotMan.Mark(slot, completed);
+            set.Slots = slotMan.ToString();
+
+            await db.SaveChangesAsync();
+        }
+
+        public async Task Delete(int setId)
+        {
+            if (await db.Sets.AnyAsync(set => set.SetId == setId))
+            {
+                db.Entry(new Set { SetId = setId }).State = EntityState.Deleted;
+            }
+
+            await db.SaveChangesAsync();
+        }
+
         private async Task<Set> GetSet(int setId)
         {
             IWowheadSet wowheadSet = await wowheadProvider.GetSetById(setId);
 
             if (wowheadSet == null)
             {
-                throw new ArgumentException("Invalid set id");
+                throw new ArgumentException("Invalid set id", "setId");
             }
 
             var set = Mapper.Map<Set>(wowheadSet);
@@ -68,7 +95,7 @@ namespace TMog.Services
             }).ToList();
 
             db.Sets.Add(set);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return set;
         }
@@ -91,7 +118,8 @@ namespace TMog.Services
             var existing = db.Sources.Local.FirstOrDefault(s => source.Type == (int)s.Type &&
                                                                 source.SubType == (int?)s.SubType &&
                                                                 source.WowheadId == s.WowheadId &&
-                                                                source.DropLevel == (int?)s.DropLevel);
+                                                                source.DropLevel == (int?)s.DropLevel &&
+                                                                source.Zone == s.ZoneId);
 
             if (existing == null)
             {
@@ -99,7 +127,8 @@ namespace TMog.Services
                 existing = db.Sources.FirstOrDefault(s => source.Type == (int)s.Type &&
                                                           source.SubType == (int?)s.SubType &&
                                                           source.WowheadId == s.WowheadId &&
-                                                          source.DropLevel == (int?)s.DropLevel);
+                                                          source.DropLevel == (int?)s.DropLevel &&
+                                                          source.Zone == s.ZoneId);
 
                 // source does not exist and needs to be created
                 if (existing == null)

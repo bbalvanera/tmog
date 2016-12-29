@@ -11,5 +11,9 @@ namespace TMog.Services
         Task<Set> GetById(int setId);
 
         Task<Set> Create(int setId);
+
+        Task MarkSetSlotCompletionStatus(int setId, SlotType slot, bool completed);
+
+        Task Delete(int setId);
     }
 }

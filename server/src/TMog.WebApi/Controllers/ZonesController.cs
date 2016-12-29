@@ -1,7 +1,5 @@
-﻿using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
 using TMog.Services;
 
 namespace TMog.WebApi.Controllers
@@ -20,7 +18,7 @@ namespace TMog.WebApi.Controllers
         {
             await zonesService.LoadZonesFromWowApi();
 
-            return new StatusCodeResult((HttpStatusCode)204, this);
+            return Ok();
         }
     }
 }

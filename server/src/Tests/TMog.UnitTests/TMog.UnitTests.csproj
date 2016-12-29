@@ -103,6 +103,8 @@
     <Compile Include="Services\Infrastructure\WowheadSetMapProfileTests\WowheadItem.cs" />
     <Compile Include="Services\Infrastructure\WowheadSetMapProfileTests\WowheadItemSource.cs" />
     <Compile Include="Services\Infrastructure\WowheadSetMapProfileTests\WowheadSet.cs" />
+    <Compile Include="Services\ItemsServiceTests\ItemsServiceTestHelper.cs" />
+    <Compile Include="Services\ItemsServiceTests\When_searching_items.cs" />
     <Compile Include="Services\SetsServiceTests\SetsServiceTestHelper.cs" />
     <Compile Include="Services\SetsServiceTests\When_creating_a_set.cs" />
     <Compile Include="Services\ZonesServiceTests\When_loading_all_zones.cs" />

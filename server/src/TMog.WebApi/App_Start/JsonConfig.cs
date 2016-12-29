@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Formatting;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace TMog.WebApi
@@ -10,6 +11,7 @@ namespace TMog.WebApi
             var settings = jsonFormatter.SerializerSettings;
             
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
         }
     }
 }
