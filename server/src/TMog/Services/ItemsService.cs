@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using TMog.Common;
+using System.Threading.Tasks;
+using AutoMapper;
 using TMog.Data;
 using TMog.Entities;
 using TMog.Models;
@@ -8,15 +10,15 @@ using TMog.WowheadApi;
 
 namespace TMog.Services
 {
-    public class ItemsService
+    public class ItemsService : IItemsService
     {
         private readonly ITMogDatabase db;
-        private readonly IWowheadProvider wowProvider;
+        private readonly IWowheadProvider wowheadProvider;
 
-        public ItemsService(ITMogDatabase db, IWowheadProvider wowProvider)
+        public ItemsService(ITMogDatabase db, IWowheadProvider wowheadProvider)
         {
             this.db = db;
-            this.wowProvider = wowProvider;
+            this.wowheadProvider = wowheadProvider;
         }
 
         public Item GetById(int itemId)
@@ -24,26 +26,27 @@ namespace TMog.Services
             return db.Items.Find(itemId);
         }
 
-        public IEnumerable<Item> SearchItems(string query)
+        public async Task<IEnumerable<Item>> SearchItems(string query)
         {
-            //var results = db.Items.Include(i => i.Set).Where(i => i.ItemId.ToString() == query || i.Name.StartsWith(query)).ToList();
-            //var itemId  = 0;
+            var results = await db.Items
+                .Include(i => i.Sets)
+                .Where(i => i.ItemId.ToString() == query || i.Name.Contains(query)).ToListAsync();
 
-            //if (results.Count() == 0 && int.TryParse(query, out itemId))
-            //{
-            //    var itemById = wowProvider.GetItemById(itemId);
-            //    if (itemById != null)
-            //    {
-            //        Item item = this.Map(itemById);
-            //        results = new List<Item>
-            //        {
-            //            item
-            //        };
-            //    }
-            //}
+            var itemId = 0;
+            if (results.Count() == 0 && int.TryParse(query, out itemId))
+            {
+                var wowheadItem = await wowheadProvider.GetItemById(itemId);
+                if (wowheadItem != null)
+                {
+                    Item item = Mapper.Map<Item>(wowheadItem);
+                    results = new List<Item>
+                    {
+                        item
+                    };
+                }
+            }
 
-            //return results;
-            return null;
+            return results;
         }
 
         public IEnumerable<ItemsByZone> GetAllItemsByZone()
@@ -76,39 +79,5 @@ namespace TMog.Services
         {
             return items.GroupBy(z => z.ZoneId).Select(z => new ItemsByZone(z.Key, z));
         }
-
-        private Item Map(IWowheadItem wowHeadItem)
-        {
-            return new Item
-            {
-                ItemId        = wowHeadItem.Id,
-                Name          = wowHeadItem.Name,
-                Slot          = this.SlotMapper.Map(wowHeadItem.Slot),
-                Quality       = (QualityType)wowHeadItem.Quality.Value,
-                Class         = wowHeadItem.Class,
-                Subclass      = wowHeadItem.Subclass,
-                iLevel        = wowHeadItem.iLevel,
-                RequiredLevel = wowHeadItem.RequiredLevel,
-                DisplayId     = wowHeadItem.DisplayId,
-                Flags         = wowHeadItem.Flags,
-                BuyPrice      = wowHeadItem.BuyPrice,
-                SellPrice     = wowHeadItem.SellPrice
-            };
-        }
-
-        private PairMapper<SlotType, int> SlotMapper = new PairMapper<SlotType, int>(new Pair<SlotType, int>[]
-        {
-            new Pair<SlotType, int>(SlotType.Other, 0),
-            new Pair<SlotType, int>(SlotType.Head, 1),
-            new Pair<SlotType, int>(SlotType.Necklace, 2),
-            new Pair<SlotType, int>(SlotType.Shoulder, 3),
-            new Pair<SlotType, int>(SlotType.Shirt, 4),
-            new Pair<SlotType, int>(SlotType.Chest, 5),
-            new Pair<SlotType, int>(SlotType.Waist, 6),
-            new Pair<SlotType, int>(SlotType.Legs, 7),
-            new Pair<SlotType, int>(SlotType.Feet, 8),
-            new Pair<SlotType, int>(SlotType.Wrist, 9),
-            new Pair<SlotType, int>(SlotType.Hands, 10)
-        });
     }
 }

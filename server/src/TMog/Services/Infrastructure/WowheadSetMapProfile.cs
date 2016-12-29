@@ -17,6 +17,7 @@ namespace TMog.Services.Infrastructure
             CreateMap<IWowheadItem, Item>()
                 .ForMember(dest => dest.ItemId, opt => opt.MapFrom(source => source.Id))
                 .ForMember(dest => dest.Source, opt => opt.Ignore())
+                .ForMember(dest => dest.Sets, opt => opt.Ignore())
                 .ForMember(dest => dest.Quality, opt => opt.ResolveUsing(source => {
                     if (!source.Quality.HasValue)
                     {
