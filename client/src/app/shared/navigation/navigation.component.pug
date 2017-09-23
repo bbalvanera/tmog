@@ -1,0 +1,33 @@
+nav.navbar.navbar-default.navbar-fixed-top
+  .container
+    .navbar-header
+      a.navbar-brand(routerLink="/dashboard") My Daily WoW
+      button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+    .navbar-collapse.collapse
+      ul.nav.navbar-nav
+        li(routerLinkActive="active")
+          a(routerLink="/dashboard") Dashboard
+        li(routerLinkActive="active")
+          a(routerLink="/quests") Quests
+        li
+          a(href="#") Achievements
+        li
+          a(href="#") Mounts &amp; Pets
+        li(routerLinkActive="active")
+          a(href="#") Recepies
+        li(routerLinkActive="active")
+          a(routerLink="/tmog-sets") Sets
+      form.navbar-form.navbar-left(role="search", (ngSubmit)="performSearch()", novalidate)
+        .form-group
+          .input-group
+            input.form-control(
+              type="text",
+              placeholder="Search item",
+              [(ngModel)]="model.searchTerm",
+              [ngModelOptions]="{standalone: true}"
+            )
+            span.glyphicon.glyphicon-search.input-group-addon
+        button.hide(type="submit")

@@ -12,23 +12,23 @@ namespace TMog.Services
 {
     public class ItemsService : IItemsService
     {
-        private readonly ITMogDatabase db;
+        private readonly ITMogDatabase tmogContext;
         private readonly IWowheadProvider wowheadProvider;
 
-        public ItemsService(ITMogDatabase db, IWowheadProvider wowheadProvider)
+        public ItemsService(ITMogDatabase tmogContext, IWowheadProvider wowheadProvider)
         {
-            this.db = db;
+            this.tmogContext = tmogContext;
             this.wowheadProvider = wowheadProvider;
         }
 
         public Item GetById(int itemId)
         {
-            return db.Items.Find(itemId);
+            return tmogContext.Items.Find(itemId);
         }
 
         public async Task<IEnumerable<Item>> SearchItems(string query)
         {
-            var results = await db.Items
+            var results = await tmogContext.Items
                 .Include(i => i.Sets)
                 .Where(i => i.ItemId.ToString() == query || i.Name.Contains(query)).ToListAsync();
 
@@ -71,7 +71,7 @@ namespace TMog.Services
 
         private IEnumerable<ItemsByZone> GetItemsByZone(string query, params object[] parameters)
         {
-            var results = db.Execute<ZoneItem>(query, parameters);
+            var results = tmogContext.Execute<ZoneItem>(query, parameters);
             return ToItemsByZone(results);
         }
 

@@ -88,6 +88,7 @@
     <Compile Include="Entities\Source.cs" />
     <Compile Include="Entities\SourceSubType.cs" />
     <Compile Include="Entities\SourceType.cs" />
+    <Compile Include="Entities\Views\ItemByLocation.cs" />
     <Compile Include="Entities\Zone.cs" />
     <Compile Include="Entities\ZoneType.cs" />
     <Compile Include="Models\ItemsByZone.cs" />

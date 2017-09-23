@@ -1,20 +1,22 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using TMog.Data;
 using TMog.Entities;
+using TMog.Entities.Views;
 using TMog.WowApi;
 
 namespace TMog.Services
 {
     public class ZonesService : IZonesService
     {
-        private readonly TMogDatabase db;
+        private readonly TMogDatabase tmogContext;
         private readonly IWowProvider wowProvider;
 
-        public ZonesService(TMogDatabase db, IWowProvider wowProvider)
+        public ZonesService(TMogDatabase tmogContext, IWowProvider wowProvider)
         {
-            this.db = db;
+            this.tmogContext = tmogContext;
             this.wowProvider = wowProvider;
         }
 
@@ -23,10 +25,17 @@ namespace TMog.Services
             Zone result = null;
             if (zoneId.HasValue)
             {
-                result = db.Zones.Find(zoneId.Value) ?? db.Zones.Add(new Zone { ZoneId = zoneId });
+                result = tmogContext.Zones.Find(zoneId.Value) ?? tmogContext.Zones.Add(new Zone { ZoneId = zoneId });
             }
 
             return await Task.FromResult(result);
+        }
+
+        public async Task<ICollection<ItemByLocation>> GetAllItemsByLocation(int? locationId = null)
+        {
+            var items = tmogContext.Database.SqlQuery<ItemByLocation>("dbo.AllItemsByLocation");
+
+            return await items.ToListAsync();
         }
 
         public async Task LoadZonesFromWowApi()
@@ -43,10 +52,10 @@ namespace TMog.Services
                 var zone = Mapper.Map<Zone>(wowZone);
                 zone.Location = GetOrCreateLocation(wowZone.Location);
 
-                db.Zones.Add(zone);
+                tmogContext.Zones.Add(zone);
             }
 
-            db.SaveChanges();
+            tmogContext.SaveChanges();
         }
 
         private Location GetOrCreateLocation(IWowLocation location)
@@ -56,7 +65,7 @@ namespace TMog.Services
                 return null;
             }
 
-            return db.Locations.Find(location.Id) ?? db.Locations.Add(Mapper.Map<Location>(location));
+            return tmogContext.Locations.Find(location.Id) ?? tmogContext.Locations.Add(Mapper.Map<Location>(location));
         }
     }
 }
