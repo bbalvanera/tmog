@@ -132,10 +132,12 @@
     <Compile Include="Infrastructure\MappingProfile.cs" />
     <Compile Include="Common\TMogSetMapper.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\ItemsByLocation.cs" />
     <Compile Include="Models\Slot.cs" />
     <Compile Include="Models\Source.cs" />
     <Compile Include="Models\TMogSet.cs" />
     <Compile Include="Models\Zone.cs" />
+    <Compile Include="Models\ZoneItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,11 @@ namespace TMog.WebApi.Common
         {
             var slotMan = new SlotManager(set.Slots);
             var tmogSet = Mapper.Map<TMogSet>(set);
-            tmogSet.Slots = set.Items.GroupBy(i => i.Slot).Select(i => new Slot
+            tmogSet.Slots = set.Items
+                .GroupBy(i => i.Slot)
+                .OrderBy(i => slotMan.IsComplete(i.Key))
+                .ThenBy(i => i.Key.ToString())
+                .Select(i => new Slot
             {
                 Name = i.Key.ToString(),
                 Items = Mapper.Map<IEnumerable<Item>>(i),

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Web.Http;
+﻿using System.Web.Http;
 using TMog.Services;
 
 namespace TMog.WebApi.Controllers
@@ -13,12 +12,6 @@ namespace TMog.WebApi.Controllers
             this.zonesService = zonesService;
         }
 
-        [HttpPost]
-        public async Task<IHttpActionResult> Load()
-        {
-            await zonesService.LoadZonesFromWowApi();
-
-            return Ok();
-        }
+        
     }
 }

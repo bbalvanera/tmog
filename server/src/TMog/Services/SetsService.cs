@@ -13,23 +13,23 @@ namespace TMog.Services
 {
     public class SetsService : ISetsService
     {
-        private readonly TMogDatabase db;
+        private readonly TMogDatabase tmogContext;
         private readonly IWowheadProvider wowheadProvider;
 
-        public SetsService(TMogDatabase db, IWowheadProvider wowheadProvider)
+        public SetsService(TMogDatabase tmogContext, IWowheadProvider wowheadProvider)
         {
-            this.db = db;
+            this.tmogContext = tmogContext;
             this.wowheadProvider = wowheadProvider;
         }
 
         public async Task<IEnumerable<Set>> GetAll()
         {
-            return await db.Sets.OrderBy(s => s.Name).ToListAsync();
+            return await tmogContext.Sets.OrderBy(s => s.Name).ToListAsync();
         }
 
         public async Task<Set> GetById(int setId)
         {
-            return await db.Sets
+            return await tmogContext.Sets
                 .Include(s => s.Items.Select(i => i.Source.Zone.Location))
                 .FirstOrDefaultAsync(s => s.SetId == setId);
         }
@@ -52,7 +52,7 @@ namespace TMog.Services
 
         public async Task MarkSetSlotCompletionStatus(int setId, SlotType slot, bool completed)
         {
-            var set = db.Sets.Find(setId);
+            var set = tmogContext.Sets.Find(setId);
 
             if (set == null)
             {
@@ -63,17 +63,17 @@ namespace TMog.Services
             slotMan.Mark(slot, completed);
             set.Slots = slotMan.ToString();
 
-            await db.SaveChangesAsync();
+            await tmogContext.SaveChangesAsync();
         }
 
         public async Task Delete(int setId)
         {
-            if (await db.Sets.AnyAsync(set => set.SetId == setId))
+            if (await tmogContext.Sets.AnyAsync(set => set.SetId == setId))
             {
-                db.Entry(new Set { SetId = setId }).State = EntityState.Deleted;
+                tmogContext.Entry(new Set { SetId = setId }).State = EntityState.Deleted;
             }
 
-            await db.SaveChangesAsync();
+            await tmogContext.SaveChangesAsync();
         }
 
         private async Task<Set> GetSet(int setId)
@@ -94,15 +94,15 @@ namespace TMog.Services
                 return item;
             }).ToList();
 
-            db.Sets.Add(set);
-            await db.SaveChangesAsync();
+            tmogContext.Sets.Add(set);
+            await tmogContext.SaveChangesAsync();
 
             return set;
         }
 
         private Item GetOrCreateItem(IWowheadItem i)
         {
-            return db.Items.Find(i.Id) ?? Mapper.Map<Item>(i);
+            return tmogContext.Items.Find(i.Id) ?? Mapper.Map<Item>(i);
         }
 
         private Source GetOrCreateSource(IEnumerable<IWowheadItemSource> sources)
@@ -115,7 +115,7 @@ namespace TMog.Services
             }
 
             // search in memory first
-            var existing = db.Sources.Local.FirstOrDefault(s => source.Type == (int)s.Type &&
+            var existing = tmogContext.Sources.Local.FirstOrDefault(s => source.Type == (int)s.Type &&
                                                                 source.SubType == (int?)s.SubType &&
                                                                 source.WowheadId == s.WowheadId &&
                                                                 source.DropLevel == (int?)s.DropLevel &&
@@ -124,7 +124,7 @@ namespace TMog.Services
             if (existing == null)
             {
                 // search in db
-                existing = db.Sources.FirstOrDefault(s => source.Type == (int)s.Type &&
+                existing = tmogContext.Sources.FirstOrDefault(s => source.Type == (int)s.Type &&
                                                           source.SubType == (int?)s.SubType &&
                                                           source.WowheadId == s.WowheadId &&
                                                           source.DropLevel == (int?)s.DropLevel &&
@@ -136,7 +136,7 @@ namespace TMog.Services
                     var newSource = Mapper.Map<Source>(source);
                     newSource.Zone = GetOrCreateZone(source.Zone);
 
-                    db.Sources.Add(newSource);
+                    tmogContext.Sources.Add(newSource);
                     existing = newSource;
                 }
             }
@@ -149,7 +149,7 @@ namespace TMog.Services
             Zone result = null;
             if (zoneId.HasValue)
             {
-                result = db.Zones.Find(zoneId.Value) ?? db.Zones.Add(new Zone { ZoneId = zoneId });
+                result = tmogContext.Zones.Find(zoneId.Value) ?? tmogContext.Zones.Add(new Zone { ZoneId = zoneId });
             }
 
             return result;
