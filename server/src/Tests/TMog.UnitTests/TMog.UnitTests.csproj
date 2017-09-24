@@ -113,16 +113,6 @@
     <Compile Include="WowheadApi\WowheadProviderTester.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\TMog.WebApi\TMog.WebApi.csproj">
-      <Project>{f8058b1a-9403-4650-8b09-4cb380cc2ee5}</Project>
-      <Name>TMog.WebApi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\TMog\TMog.csproj">
-      <Project>{469baffe-6a8a-46e6-a6f0-b42e6e8c2f2e}</Project>
-      <Name>TMog</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="UnitTestData\TMogSets.json">
@@ -131,6 +121,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="WebApi\Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TMog\TMog.csproj">
+      <Project>{469baffe-6a8a-46e6-a6f0-b42e6e8c2f2e}</Project>
+      <Name>TMog</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
