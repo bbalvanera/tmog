@@ -11,7 +11,5 @@ namespace TMog.WebApi.Controllers
         {
             this.zonesService = zonesService;
         }
-
-        
     }
 }
