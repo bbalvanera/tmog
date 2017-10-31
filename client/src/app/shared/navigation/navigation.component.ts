@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
-  selector: 'navigation',
+  selector: 'app-navigation',
   templateUrl: 'navigation.component.html',
-  styleUrls: ['navigation.component.css']
+  styleUrls: ['navigation.component.scss']
 })
 export class NavigationComponent {
-    public model: {
+    public model = {
       searchTerm: ''
     };
 

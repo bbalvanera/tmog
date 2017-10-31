@@ -4,13 +4,14 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "serve": "ng serve -bh /",
+    "start": "ng build -w",
+    "build": "ng build -e prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "pug": "pug src",
-    "pug:watch": "pug src -P -w"
+    "pug:watch": "pug src -P -w --doctype html"
   },
   "private": true,
   "dependencies": {

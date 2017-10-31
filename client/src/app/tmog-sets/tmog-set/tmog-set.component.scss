@@ -1,0 +1,60 @@
+.card {
+  h4 {
+    margin-bottom: 0;
+  }
+  a {
+    color: #fff;
+  }
+}
+
+.group {
+    padding-left: 10px;
+}
+
+td {
+    &.first {
+        width: 40%;
+    }
+
+    &.middle {
+        width: 20%;
+    }
+
+    &.last {
+        width: 40%;
+    }
+}
+
+.table {
+  &> thead, tbody > tr {
+
+    &> th, td { /* required to override bootstrap */
+        vertical-align: middle;
+        border-bottom: none;
+        padding: 8px;
+    }
+
+    label {
+      margin-bottom: 0;
+
+      &.btn {
+        padding: 5px 15px;
+      }
+    }
+  }
+
+  margin-bottom: 0;
+  transition: height 2s;
+}
+
+th > .btn {
+    input[type="checkbox"] {
+        position: absolute;
+        clip: rect(0,0,0,0);
+        pointer-events: none;
+    }
+}
+
+th.collapsed {
+    width: 150px;
+}
