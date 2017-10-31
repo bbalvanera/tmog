@@ -12,6 +12,6 @@ namespace TMog.WebApi.Models
 
         public Source Source { get; set; }
 
-        public IEnumerable<TMogSet> Sets { get; set; }
+        public IEnumerable<TmogSet> Sets { get; set; }
     }
 }

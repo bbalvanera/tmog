@@ -14,7 +14,7 @@ namespace TMog.TypescriptGenerator
                 .For<Item>()
                 .For<Slot>()
                 .For<Source>()
-                .For<TMogSet>()
+                .For<TmogSet>()
                 .For<Zone>()
                 
                 .WithModuleNameFormatter(module => "")

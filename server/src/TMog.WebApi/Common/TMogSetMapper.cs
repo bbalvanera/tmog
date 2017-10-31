@@ -8,10 +8,10 @@ namespace TMog.WebApi.Common
 {
     public static class TMogSetMapper
     {
-        public static TMogSet FromSet(Entities.Set set)
+        public static TmogSet FromSet(Entities.Set set)
         {
             var slotMan = new SlotManager(set.Slots);
-            var tmogSet = Mapper.Map<TMogSet>(set);
+            var tmogSet = Mapper.Map<TmogSet>(set);
             tmogSet.Slots = set.Items
                 .GroupBy(i => i.Slot)
                 .OrderBy(i => slotMan.IsComplete(i.Key))

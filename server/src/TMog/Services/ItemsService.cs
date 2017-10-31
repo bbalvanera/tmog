@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using TMog.Data;
 using TMog.Entities;
 using TMog.Models;
@@ -21,10 +21,7 @@ namespace TMog.Services
             this.wowheadProvider = wowheadProvider;
         }
 
-        public Item GetById(int itemId)
-        {
-            return tmogContext.Items.Find(itemId);
-        }
+        public Item GetById(int itemId) => tmogContext.Items.Find(itemId);
 
         public async Task<IEnumerable<Item>> SearchItems(string query)
         {
@@ -32,8 +29,7 @@ namespace TMog.Services
                 .Include(i => i.Sets)
                 .Where(i => i.ItemId.ToString() == query || i.Name.Contains(query)).ToListAsync();
 
-            var itemId = 0;
-            if (results.Count() == 0 && int.TryParse(query, out itemId))
+            if (results.Count() == 0 && int.TryParse(query, out int itemId))
             {
                 var wowheadItem = await wowheadProvider.GetItemById(itemId);
                 if (wowheadItem != null)
@@ -49,35 +45,20 @@ namespace TMog.Services
             return results;
         }
 
-        public IEnumerable<ItemsByZone> GetAllItemsByZone()
-        {
-            return GetItemsByZone("dbo.AllItemsByZone");
-        }
+        public async Task<IEnumerable<ItemsByZone>> GetAllItemsByZone() => await Execute("dbo.AllItemsByZone");
 
-        public IEnumerable<ItemsByZone> GetAllSetItemsByZone(int setId)
-        {
-            return GetItemsByZone("dbo.AllSetItemsByZone @p0", setId);
-        }
+        public async Task<IEnumerable<ItemsByZone>> GetAllSetItemsByZone(int setId) => await Execute("dbo.AllSetItemsByZone @p0", setId);
 
-        public IEnumerable<ItemsByZone> GetAllItemsInZone(int zoneId)
-        {
-            return GetItemsByZone("dbo.AllItemsInZone @p0", zoneId);
-        }
+        public async Task<IEnumerable<ItemsByZone>> GetAllItemsInZone(int zoneId) => await Execute("dbo.AllItemsInZone @p0", zoneId);
 
-        public IEnumerable<ItemsByZone> GetAllBuyableItemsByZone()
-        {
-            return GetItemsByZone("dbo.AllBuyableItemsByZone");
-        }
+        public async Task<IEnumerable<ItemsByZone>> GetAllBuyableItemsByZone() => await Execute("dbo.AllBuyableItemsByZone");
 
-        private IEnumerable<ItemsByZone> GetItemsByZone(string query, params object[] parameters)
+        private async Task<IEnumerable<ItemsByZone>> Execute(string query, params object[] parameters)
         {
             var results = tmogContext.Execute<ZoneItem>(query, parameters);
-            return ToItemsByZone(results);
+            return ToItemsByZone(await results);
         }
 
-        private IEnumerable<ItemsByZone> ToItemsByZone(IEnumerable<ZoneItem> items)
-        {
-            return items.GroupBy(z => z.ZoneId).Select(z => new ItemsByZone(z.Key, z));
-        }
+        private IEnumerable<ItemsByZone> ToItemsByZone(IEnumerable<ZoneItem> items) => items.GroupBy(z => z.Continent).Select(z => new ItemsByZone(z.Key, z));
     }
 }

@@ -71,6 +71,18 @@ namespace TMog.Business
             return string.Join("", this.slots);
         }
 
+        public static bool InSlots(string slots, SlotType slot)
+        {
+            try
+            {
+                return slots[(int)slot] == '1';
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static string FromRange(IEnumerable<int> slots)
         {
             if (slots == null)

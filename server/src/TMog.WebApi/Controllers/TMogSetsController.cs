@@ -1,8 +1,8 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
-using AutoMapper;
 using TMog.Services;
 using TMog.WebApi.Common;
 using TMog.WebApi.Models;
@@ -23,9 +23,9 @@ namespace TMog.WebApi.Controllers
         public async Task<IHttpActionResult> Get()
         {
             var results = await service.GetAll();
-            var mapped  = Mapper.Map<IEnumerable<TMogSet>>(results);
+            var mapped  = Mapper.Map<IEnumerable<TmogSet>>(results);
 
-            return Ok(mapped);
+            return Ok(new { sets = mapped });
         }
 
         [Route("{id:int}", Name = "tmog-sets")]
@@ -35,7 +35,7 @@ namespace TMog.WebApi.Controllers
             if (set != null)
             {
 
-                TMogSet tmogSet = TMogSetMapper.FromSet(set);
+                TmogSet tmogSet = TMogSetMapper.FromSet(set);
 
                 return Ok(tmogSet);
             }

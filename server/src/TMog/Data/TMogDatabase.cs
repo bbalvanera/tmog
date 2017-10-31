@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Threading.Tasks;
 using TMog.Data.Configuration;
 using TMog.Entities;
 
@@ -12,35 +13,19 @@ namespace TMog.Data
             Database.SetInitializer<TMogDatabase>(new TMogDbInitializer());
         }
 
-        public IDbSet<Set> Sets
-        {
-            get;
-            set;
-        }
+        public IDbSet<Set> Sets { get; set; }
 
-        public IDbSet<Item> Items
-        {
-            get;
-            set;
-        }
+        public IDbSet<Item> Items { get; set; }
 
-        public IDbSet<Source> Sources
-        {
-            get;
-            set;
-        }
+        public IDbSet<Source> Sources { get; set; }
 
-        public IDbSet<Zone> Zones
-        {
-            get;
-            set;
-        }
-
+        public IDbSet<Zone> Zones { get; set; }
+        
         public IDbSet<Location> Locations { get; set; }
 
-        public IEnumerable<T> Execute<T>(string name, params object[] parameters)
+        public async Task<IEnumerable<T>> Execute<T>(string name, params object[] parameters)
         {
-            return this.Database.SqlQuery<T>(name, parameters);
+            return await Database.SqlQuery<T>(name, parameters).ToListAsync();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

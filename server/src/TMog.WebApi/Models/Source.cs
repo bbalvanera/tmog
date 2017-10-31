@@ -8,6 +8,8 @@
 
         public string SubType { get; set; }
 
+        public string DropLevel { get; set; }
+
         public string Description { get; set; }
 
         public int? WowheadId { get; set; }

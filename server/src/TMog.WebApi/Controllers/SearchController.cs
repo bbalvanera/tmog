@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using AutoMapper;
 using TMog.Business;
 using TMog.Services;
 using TMog.WebApi.Models;
@@ -18,7 +18,7 @@ namespace TMog.WebApi.Controllers
             this.service = service;
         }
 
-        public async Task<IEnumerable<Item>> Get(string q)
+        public async Task<IHttpActionResult> Get(string q)
         {
             if (!string.IsNullOrWhiteSpace(q))
             {
@@ -30,10 +30,10 @@ namespace TMog.WebApi.Controllers
                     retVal = Map(searchedItems);
                 }
 
-                return retVal;
+                return Ok(new { results = retVal });
             }
 
-            return Enumerable.Empty<Item>();
+            return Ok(new { results = new object[0] });
         }
 
         private List<Item> Map(IEnumerable<Entities.Item> searchedItems)
@@ -43,13 +43,13 @@ namespace TMog.WebApi.Controllers
             foreach (var searchItem in searchedItems)
             {
                 var item = Mapper.Map<Item>(searchItem);
-                var tmogSets = new List<TMogSet>();
+                var tmogSets = new List<TmogSet>();
 
                 if (searchItem.Sets != null)
                 {
                     foreach (var set in searchItem.Sets)
                     {
-                        var tmogSet = Mapper.Map<TMogSet>(set);
+                        var tmogSet = Mapper.Map<TmogSet>(set);
                         tmogSet.Slots = new List<Slot>
                         {
                             new Slot

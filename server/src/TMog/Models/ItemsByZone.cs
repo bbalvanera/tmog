@@ -4,13 +4,13 @@ namespace TMog.Models
 {
     public class ItemsByZone
     {
-        public ItemsByZone(int? zoneId, IEnumerable<ZoneItem> items)
+        public ItemsByZone(string continent, IEnumerable<ZoneItem> items)
         {
-            this.ZoneId = ZoneId;
-            this.Items  = items;
+            Continent = continent;
+            Items  = items;
         }
 
-        public int? ZoneId { get; set; }
+        public string Continent { get; set; }
 
         public IEnumerable<ZoneItem> Items { get; set; }
     }

@@ -2,7 +2,7 @@
 
 namespace TMog.WebApi.Models
 {
-    public class TMogSet
+    public class TmogSet
     {
         public int Id { get; set; }
 

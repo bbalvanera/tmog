@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Threading.Tasks;
 using TMog.Entities;
 
 namespace TMog.Data
@@ -16,7 +17,7 @@ namespace TMog.Data
 
         IDbSet<Location> Locations { get; }
 
-        IEnumerable<T> Execute<T>(string name, params object[] parameters);
+        Task<IEnumerable<T>> Execute<T>(string name, params object[] parameters);
 
         int SaveChanges();
     }

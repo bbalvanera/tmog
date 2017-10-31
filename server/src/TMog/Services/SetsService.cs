@@ -1,9 +1,9 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using TMog.Business;
 using TMog.Data;
 using TMog.Entities;
@@ -22,10 +22,7 @@ namespace TMog.Services
             this.wowheadProvider = wowheadProvider;
         }
 
-        public async Task<IEnumerable<Set>> GetAll()
-        {
-            return await tmogContext.Sets.OrderBy(s => s.Name).ToListAsync();
-        }
+        public async Task<IEnumerable<Set>> GetAll() => await tmogContext.Sets.OrderBy(s => s.Name).ToListAsync();
 
         public async Task<Set> GetById(int setId)
         {

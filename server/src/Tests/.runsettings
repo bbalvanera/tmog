@@ -58,7 +58,7 @@
     <DeleteDeploymentDirectoryAfterTestRunIsComplete>False</DeleteDeploymentDirectoryAfterTestRunIsComplete>  
     <DeploymentEnabled>False</DeploymentEnabled>  
     <AssemblyResolution>  
-      <Directory Path="../../../bin" includeSubDirectories="false"/>  
+      <Directory Path="../../bin" includeSubDirectories="false"/>  
     </AssemblyResolution>  
   </MSTest>  
   
