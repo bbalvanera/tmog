@@ -6,9 +6,9 @@
     "ng": "ng",
     "serve": "ng serve -bh /",
     "start": "ng build -w",
-    "build": "ng build -e prod",
+    "build": "ng build -e prod -bh /tmog/",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "ng lint --type-check",
     "e2e": "ng e2e",
     "pug": "pug src",
     "pug:watch": "pug src -P -w --doctype html"

@@ -1,7 +1,80 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("assets/css/cyborg.theme.css");
+@import url("assets/css/darkly.theme.css");
 @import url("assets/css/font-awesome.min.css");
 
+html {
+  overflow-y: scroll;
+}
+
+body {
+  font-size: 0.875rem;
+}
+
+a {
+  &:focus, &:hover {
+    text-decoration: none;
+  }
+}
+
+button, input, optgroup, select, textarea {
+  font-family: inherit;
+}
+
+ngb-accordion {
+  h6 {
+    margin-bottom: 0;
+  }
+
+  ngb-accordion {
+    .card-header a {
+      color: var(--white);
+
+      &:hover {
+        color: var(--gray);
+      }
+    }
+  }
+}
+
 .card {
-  margin-bottom: 1rem;
+  &.title {
+    margin-bottom: 1rem;
+  }
+
+  .card-header {
+    border-bottom: none; // removes a nasty bug in chrome
+  }
+
+  .card-body {
+    h1, h2, h3, h4, h5, h6 {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.table {
+  margin-bottom: 0;
+
+  thead th {
+    border-top: none;
+    border-bottom: 1px solid var(--secondary);
+  }
+
+  td {
+    vertical-align: middle;
+    border: none;
+    padding: 0.35rem;
+  }
+
+  th, td {
+    a {
+      color: var(--white);
+    }
+  }
+}
+
+.title {
+  .btn:first-of-type {
+    margin-left: 1rem;
+  }
 }

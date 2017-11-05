@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMog.Entities;
-using TMog.Models;
+using TMog.Entities.Views;
 
 namespace TMog.Services
 {
@@ -11,12 +11,12 @@ namespace TMog.Services
 
         Task<IEnumerable<Item>> SearchItems(string query);
 
-        Task<IEnumerable<ItemsByZone>> GetAllItemsByZone();
+        Task<IEnumerable<ZonesByRegion>> GetAllItemsByRegion();
 
-        Task<IEnumerable<ItemsByZone>> GetAllSetItemsByZone(int setId);
+        Task<IEnumerable<ZonesByRegion>> GetAllSetItemsByZone(int setId);
 
-        Task<IEnumerable<ItemsByZone>> GetAllItemsInZone(int zoneId);
+        Task<IEnumerable<ZonesByRegion>> GetAllItemsInZone(int zoneId);
 
-        Task<IEnumerable<ItemsByZone>> GetAllBuyableItemsByZone();
+        Task<IEnumerable<ZonesByRegion>> GetAllBuyableItemsByZone();
     }
 }

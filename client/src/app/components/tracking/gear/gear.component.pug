@@ -1,0 +1,33 @@
+.card.card-outline-secondary.title
+  .card-body
+    h5 Tracked items by region
+      button.btn.btn-sm.btn-primary([routerLink]="['/tmog-sets']", type="button") Back to sets
+.btn-group(role="group", aria-label="Collapse/Expand regions")
+  button#collapse.btn.btn-sm.btn-secondary(type="button", (click)="expandAllPanels()", title="Expand all regions")
+    i.fa.fa-plus(aria-hidden="true")
+  button#collapse.btn.btn-sm.btn-secondary(type="button", (click)="collapseAllPanels()", title="Collapse all regions")
+    i.fa.fa-minus(aria-hidden="true")
+ngb-accordion(activeIds="{{getAllDOMIds(regions, 'region')}}", [destroyOnHide]="false")
+  ngb-panel(*ngFor="let region of regions", id="{{getDOMId(region, 'region')}}")
+    ng-template(ngbPanelTitle)
+      h6 {{region.name}}
+    ng-template.test(ngbPanelContent)
+      ngb-accordion(activeIds="{{getAllDOMIds(region.zones, 'zone')}}", [destroyOnHide]="false")
+        ngb-panel(*ngFor="let zone of region.zones", id="{{getDOMId(zone, 'zone')}}")
+          ng-template(ngbPanelTitle)
+            div
+              | {{zone.name}}
+              small([ngClass]="getZoneDifficultyClasses(zone.difficulty)") {{getZoneDifficultyName(zone.difficulty)}}
+          ng-template(ngbPanelContent)
+            table.table
+              tbody
+                tr(*ngFor="let item of zone.items")
+                  td.first([ngClass]="'q' + item.itemQuality")
+                    a(href="{{'http://www.wowhead.com/item=' + item.itemId}}", target="_blank") {{item.itemName}}
+                  td.middle
+                    span(*ngIf="item.source;then source else bossDrop")
+                    ng-template(#source)
+                      a(href="{{'http://www.wowhead.com/' + item.sourceSubType + '=' + item.sourceId}}", target="_blank") {{item.source}}
+                    ng-template(#bossDrop) Boss Drop
+                  td.last
+                    a(rel="transmog-set={{item.setId}}", [routerLink]="['/tmog-set', item.setId]", (click)="dismissTooltip()") {{item.setName}}

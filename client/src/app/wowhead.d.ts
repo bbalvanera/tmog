@@ -1,4 +1,4 @@
-declare var $WH: {
+declare var WH: {
     Tooltip: {
         showingTooltip: boolean,
         hide(): void

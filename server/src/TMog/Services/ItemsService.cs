@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TMog.Data;
 using TMog.Entities;
-using TMog.Models;
+using TMog.Entities.Views;
 using TMog.WowheadApi;
 
 namespace TMog.Services
@@ -45,20 +45,63 @@ namespace TMog.Services
             return results;
         }
 
-        public async Task<IEnumerable<ItemsByZone>> GetAllItemsByZone() => await Execute("dbo.AllItemsByZone");
+        public async Task<IEnumerable<ZonesByRegion>> GetAllItemsByRegion() => await Execute("dbo.AllItemsByZone");
 
-        public async Task<IEnumerable<ItemsByZone>> GetAllSetItemsByZone(int setId) => await Execute("dbo.AllSetItemsByZone @p0", setId);
+        public async Task<IEnumerable<ZonesByRegion>> GetAllSetItemsByZone(int setId) => await Execute("dbo.AllSetItemsByZone @p0", setId);
 
-        public async Task<IEnumerable<ItemsByZone>> GetAllItemsInZone(int zoneId) => await Execute("dbo.AllItemsInZone @p0", zoneId);
+        public async Task<IEnumerable<ZonesByRegion>> GetAllItemsInZone(int zoneId) => await Execute("dbo.AllItemsInZone @p0", zoneId);
 
-        public async Task<IEnumerable<ItemsByZone>> GetAllBuyableItemsByZone() => await Execute("dbo.AllBuyableItemsByZone");
+        public async Task<IEnumerable<ZonesByRegion>> GetAllBuyableItemsByZone() => await Execute("dbo.AllBuyableItemsByZone");
 
-        private async Task<IEnumerable<ItemsByZone>> Execute(string query, params object[] parameters)
+        private async Task<IEnumerable<ZonesByRegion>> Execute(string query, params object[] parameters)
         {
             var results = tmogContext.Execute<ZoneItem>(query, parameters);
-            return ToItemsByZone(await results);
+            return ToZonesByRegion(await results);
         }
 
-        private IEnumerable<ItemsByZone> ToItemsByZone(IEnumerable<ZoneItem> items) => items.GroupBy(z => z.Continent).Select(z => new ItemsByZone(z.Key, z));
+        private IEnumerable<ZonesByRegion> ToZonesByRegion(IEnumerable<ZoneItem> allItems)
+        {
+            // group by ZoneName and ZoneDifficulty and then group by Region
+            // this grouping returns:
+            // Region 1
+            // -- Zone 1 & Difficulty 1
+            // ---- Item 1
+            // ---- Item 2
+            // ---- Item 3
+            // Region 2
+            // -- Zone 1 & Difficulty 2
+            // ---- Item 1
+            // ---- Item 2
+            // ---- Item 3
+            // Region 2
+            // -- Zone 2 & Difficulty 1
+            // ---- Item 1
+            // ---- Item 2
+            // ---- Item 3
+            // Region 2
+            // -- Zone 2 & Difficulty 2
+            // ---- Item 1
+            // ---- Item 2
+            // ---- Item 3
+            var allZonesByRegion = 
+                allItems
+                    .GroupBy(item1 => item1.RegionId)
+                    .Select(zonesByRegion => new ZonesByRegion
+                    {
+                        RegionId   = zonesByRegion.Key,
+                        RegionName = zonesByRegion.First().RegionName,
+                        Zones         = zonesByRegion
+                                            .GroupBy(itemsByZone => itemsByZone.ZoneName + itemsByZone.ZoneDifficulty) // by zone & difficulty e.g. Ulduar25Heroic or Ulduar10Heroic
+                                            .Select(itemsByZone => new ItemsByZone
+                                            {
+                                                ZoneId         = itemsByZone.First().ZoneId,
+                                                ZoneName       = itemsByZone.First().ZoneName,
+                                                ZoneDifficulty = itemsByZone.First().ZoneDifficulty,
+                                                Items          = itemsByZone
+                                            })
+                    });
+
+            return allZonesByRegion;
+        }
     }
 }

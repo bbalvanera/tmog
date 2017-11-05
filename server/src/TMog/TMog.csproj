@@ -83,12 +83,11 @@
     <Compile Include="Entities\Source.cs" />
     <Compile Include="Entities\SourceSubType.cs" />
     <Compile Include="Entities\SourceType.cs" />
-    <Compile Include="Entities\Views\ItemByLocation.cs" />
+    <Compile Include="Entities\Views\ZonesByRegion.cs" />
     <Compile Include="Entities\Zone.cs" />
     <Compile Include="Entities\ZoneType.cs" />
-    <Compile Include="Models\ItemsByZone.cs" />
-    <Compile Include="Models\ZoneItem.cs" />
-    <Compile Include="Models\SetInfo.cs" />
+    <Compile Include="Entities\Views\ItemsByZone.cs" />
+    <Compile Include="Entities\Views\ZoneItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DuplicateEntityException.cs" />
     <Compile Include="Services\IItemsService.cs">

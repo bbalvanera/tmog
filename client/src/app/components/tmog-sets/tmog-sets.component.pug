@@ -1,0 +1,27 @@
+ng-template(ngbModalContainer)
+.card.card-outline-secondary.title
+  .card-body
+    h5 Transmogrification Sets
+      button.btn.btn-primary.btn-sm((click)="newSet(content)", type="button") Add new set
+      button.btn.btn-primary.btn-sm([routerLink]="['/tracking/gear']", type="button") Tracking view
+.alert.alert-danger(*ngIf="error")
+  strong {{error.shortText}}
+  p {{error.message}}
+ul.list-group(*ngIf="!error")
+  li.list-group-item
+    table.table
+      thead
+        tr
+          th #
+          th Name
+          th Completion
+          th
+      tbody
+        tr(*ngFor="let tmogSet of tmogSets", [ngClass]="{ 'table-success': isSetComplete(tmogSet), 'table-warning': isSetAlmostComplete(tmogSet) }")
+          td {{tmogSet.id}}
+          td
+            a(rel="transmog-set={{tmogSet.id}}", [routerLink]="['/tmog-set', tmogSet.id]", (click)="dismissTooltip()") {{tmogSet.name}}
+          td {{tmogSet.completedSlots}}/{{tmogSet.totalSlots}}
+          td
+            button.btn.btn-danger.btn-sm(type="button", (click)="removeSet(tmogSet.id)")
+              i.fa.fa-times(aria-hidden="true", title="Remove Set")

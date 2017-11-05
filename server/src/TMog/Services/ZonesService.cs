@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using TMog.Data;
 using TMog.Entities;
-using TMog.Entities.Views;
 using TMog.WowApi;
 
 namespace TMog.Services
@@ -29,13 +27,6 @@ namespace TMog.Services
             }
 
             return await Task.FromResult(result);
-        }
-
-        public async Task<ICollection<ItemByLocation>> GetAllItemsByLocation(int? locationId = null)
-        {
-            var items = tmogContext.Database.SqlQuery<ItemByLocation>("dbo.AllItemsByLocation");
-
-            return await items.ToListAsync();
         }
 
         public async Task LoadZonesFromWowApi()

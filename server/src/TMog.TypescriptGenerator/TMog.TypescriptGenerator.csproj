@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,6 +57,9 @@
     <Compile Include="..\TMog.WebApi\Models\Item.cs">
       <Link>Models\Item.cs</Link>
     </Compile>
+    <Compile Include="..\TMog.WebApi\Models\Region.cs">
+      <Link>Models\Region.cs</Link>
+    </Compile>
     <Compile Include="..\TMog.WebApi\Models\Slot.cs">
       <Link>Models\Slot.cs</Link>
     </Compile>
@@ -67,6 +71,12 @@
     </Compile>
     <Compile Include="..\TMog.WebApi\Models\Zone.cs">
       <Link>Models\Zone.cs</Link>
+    </Compile>
+    <Compile Include="..\TMog.WebApi\Models\ZoneItem.cs">
+      <Link>Models\ZoneItem.cs</Link>
+    </Compile>
+    <Compile Include="..\TMog.WebApi\Models\ZoneItems.cs">
+      <Link>Models\ZoneItems.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

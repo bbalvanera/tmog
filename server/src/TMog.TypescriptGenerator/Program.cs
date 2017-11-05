@@ -16,7 +16,10 @@ namespace TMog.TypescriptGenerator
                 .For<Source>()
                 .For<TmogSet>()
                 .For<Zone>()
-                
+                .For<ZoneItem>()
+                .For<ZoneItems>()
+                .For<Region>()
+
                 .WithModuleNameFormatter(module => "")
                 .WithVisibility((tsClass, type) => true)
                 .WithMemberFormatter(identifier => {

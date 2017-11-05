@@ -5,17 +5,17 @@ namespace TMog.Entities
     public enum DropLevel
     {
         Unknown,
-        [Display(Name = "(N)")]
+        [Display(Name = "Normal")]
         DungeonNormal = -1,
-        [Display(Name = "(H)")]
+        [Display(Name = "Heroic")]
         DungeonHeroic = -2,
-        [Display(Name = "(10N)")]
+        [Display(Name = "10 Normal")]
         Raid10Normal = 1,
-        [Display(Name = "(25N)")]
+        [Display(Name = "25 Normal")]
         Raid25Normal,
-        [Display(Name = "(10H)")]
+        [Display(Name = "10 Heroic")]
         Raid10Heroic,
-        [Display(Name = "(25H)")]
+        [Display(Name = "25 Heroic")]
         Raid25Heroic
     }
 }
