@@ -20,29 +20,13 @@ button, input, optgroup, select, textarea {
   font-family: inherit;
 }
 
-ngb-accordion {
-  h6 {
-    margin-bottom: 0;
-  }
 
-  ngb-accordion {
-    .card-header a {
-      color: var(--white);
 
-      &:hover {
-        color: var(--gray);
-      }
-    }
-  }
-}
+.card.page-title {
+  margin-bottom: 1rem;
 
-.card {
-  &.title {
-    margin-bottom: 1rem;
-  }
-
-  .card-header {
-    border-bottom: none; // removes a nasty bug in chrome
+  .btn:first-of-type {
+    margin-left: 1rem;
   }
 
   .card-body {
@@ -50,6 +34,10 @@ ngb-accordion {
       margin-bottom: 0;
     }
   }
+}
+
+.card-header {
+  border-bottom: none; // removes a nasty bug in chrome
 }
 
 .table {
@@ -70,11 +58,5 @@ ngb-accordion {
     a {
       color: var(--white);
     }
-  }
-}
-
-.title {
-  .btn:first-of-type {
-    margin-left: 1rem;
   }
 }

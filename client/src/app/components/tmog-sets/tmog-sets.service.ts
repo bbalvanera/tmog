@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
-import { TmogSet } from '../../core/models';
-import { Settings } from '../../core/settings';
+import { TmogSet } from '../../common/models';
+import { Settings } from '../../common/settings';
 
 @Injectable()
 export class TmogSetsService {

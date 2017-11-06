@@ -1,23 +1,23 @@
-.card.card-outline-secondary.title
+.card.card-outline-secondary.page-title
   .card-body
     h5 Tracked items by region
       button.btn.btn-sm.btn-primary([routerLink]="['/tmog-sets']", type="button") Back to sets
 .btn-group(role="group", aria-label="Collapse/Expand regions")
-  button#collapse.btn.btn-sm.btn-secondary(type="button", (click)="expandAllPanels()", title="Expand all regions")
+  button.btn.btn-sm.btn-secondary.mb-1(type="button", (click)="expandAllPanels()", title="Expand all regions")
     i.fa.fa-plus(aria-hidden="true")
-  button#collapse.btn.btn-sm.btn-secondary(type="button", (click)="collapseAllPanels()", title="Collapse all regions")
+  button.btn.btn-sm.btn-secondary.mb-1(type="button", (click)="collapseAllPanels()", title="Collapse all regions")
     i.fa.fa-minus(aria-hidden="true")
 ngb-accordion(activeIds="{{getAllDOMIds(regions, 'region')}}", [destroyOnHide]="false")
-  ngb-panel(*ngFor="let region of regions", id="{{getDOMId(region, 'region')}}")
+  ngb-panel(*ngFor="let region of regions", [id]="getDOMId(region, 'region')")
     ng-template(ngbPanelTitle)
-      h6 {{region.name}}
+      h6.mb-0.region-name {{region.name}}
     ng-template.test(ngbPanelContent)
       ngb-accordion(activeIds="{{getAllDOMIds(region.zones, 'zone')}}", [destroyOnHide]="false")
-        ngb-panel(*ngFor="let zone of region.zones", id="{{getDOMId(zone, 'zone')}}")
+        ngb-panel(*ngFor="let zone of region.zones", [id]="getDOMId(zone, 'zone')")
           ng-template(ngbPanelTitle)
-            div
+            .zone-name
               | {{zone.name}}
-              small([ngClass]="getZoneDifficultyClasses(zone.difficulty)") {{getZoneDifficultyName(zone.difficulty)}}
+              small.ml-2.font-italic([ngClass]="getZoneDifficultyClass(zone.difficulty)") {{getZoneDifficultyName(zone.difficulty)}}
           ng-template(ngbPanelContent)
             table.table
               tbody

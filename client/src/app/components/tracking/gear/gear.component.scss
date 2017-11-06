@@ -1,18 +1,14 @@
-#collapse {
-  margin-bottom: 0.3rem;
+.region-name, .zone-name {
+  color: var(--white);
+  text-decoration: none;
 }
 
-ngb-accordion {
-  div small {
-    margin-left: 1rem;
-    font-style: italic;
+td {
+  &.first {
+    width: 30%;
   }
-}
 
-td.first {
-  width: 30%
-}
-
-td.middle {
-  width: 20%
+  &.middle {
+    width: 20%;
+  }
 }

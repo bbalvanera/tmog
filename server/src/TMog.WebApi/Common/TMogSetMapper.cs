@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
 using TMog.Business;
 using TMog.WebApi.Models;
 
@@ -15,13 +15,14 @@ namespace TMog.WebApi.Common
             tmogSet.Slots = set.Items
                 .GroupBy(i => i.Slot)
                 .OrderBy(i => slotMan.IsComplete(i.Key))
-                .ThenBy(i => i.Key.ToString())
+                .ThenBy(i => (int)i.Key)
                 .Select(i => new Slot
-            {
-                Name = i.Key.ToString(),
-                Items = Mapper.Map<IEnumerable<Item>>(i),
-                Complete = slotMan.IsComplete(i.Key)
-            });
+                {
+                    SlotNumber = (int)i.Key,
+                    SlotName   = i.Key.ToString(),
+                    Items      = Mapper.Map<IEnumerable<Item>>(i),
+                    Complete   = slotMan.IsComplete(i.Key)
+                });
 
             return tmogSet;
         }

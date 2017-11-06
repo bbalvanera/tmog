@@ -54,8 +54,9 @@ namespace TMog.WebApi.Controllers
                         {
                             new Slot
                             {
-                                Name = searchItem.Slot.ToString(),
-                                Complete = new SlotManager(set.Slots).IsComplete(searchItem.Slot)
+                                SlotNumber = (int)searchItem.Slot,
+                                SlotName   = searchItem.Slot.ToString(),
+                                Complete   = new SlotManager(set.Slots).IsComplete(searchItem.Slot)
                             }
                         };
 

@@ -1,36 +1,15 @@
-.card {
-  a {
-    color: var(--white);
-  }
+.slot-name {
+  color: var(--white);
+  text-decoration: none;
 }
 
-ul {
-  li {
-    flex-flow: column;
-    align-items: flex-start;
-
-    &.completed {
-      flex-flow: row;
-
-      span.completed {
-        position: absolute;
-        left: 7rem;
-        padding: 0.5rem 1rem;
-        font-weight: bold;
-      }
-    }
-  }
-
-  label.btn {
-    input[type="checkbox"] {
-        position: absolute;
-        clip: rect(0,0,0,0);
-        pointer-events: none;
-    }
-  }
+.completed-item {
+  position: absolute;
+  left: 7rem;
+  font-weight: bold;
 }
 
-.table {
+.table.set-items {
   td { /* required to override bootstrap */
     &.first {
           width: 40%;

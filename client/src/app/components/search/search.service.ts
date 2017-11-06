@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { Item } from '../../core/models';
-import { Settings } from '../../core/settings';
+import { Item } from '../../common/models';
+import { Settings } from '../../common/settings';
 
 @Injectable()
 export class SearchService {

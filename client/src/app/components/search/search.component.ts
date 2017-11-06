@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { WowheadTooltipService } from '../../services/wowhead-tooltip.service';
-import { Item } from '../../core/models';
+import { Item } from '../../common/models';
 import { SearchService } from './search.service';
 
 @Component({

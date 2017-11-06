@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { Services } from './services';
-import { Settings } from './core/settings';
+import { Settings } from './common/settings';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

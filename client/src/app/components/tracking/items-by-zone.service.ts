@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Region } from '../../core/models';
-import { Settings } from '../../core/settings';
+import { Region } from '../../common/models';
+import { Settings } from '../../common/settings';
 
 @Injectable()
 export class ItemsByZoneService {
@@ -15,7 +15,11 @@ export class ItemsByZoneService {
 
   public all(setId?: number): Observable<Region[]> {
     return this.http.get(this.endpoint)
-      .map(response => response.json())
-      .map(result => result.regions);
+      .map(response => {
+        return response.json();
+      })
+      .map(result => {
+        return result.regions;
+      });
   }
 }

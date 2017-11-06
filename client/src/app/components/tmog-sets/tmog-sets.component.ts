@@ -4,7 +4,7 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 import { WowheadTooltipService } from '../../services/wowhead-tooltip.service';
 import { TmogSetsService } from './tmog-sets.service';
-import { TmogSet } from '../../core/models';
+import { TmogSet } from '../../common/models';
 import { TmogSetAddComponent } from './tmog-set-add/tmog-set-add.component';
 
 @Component({

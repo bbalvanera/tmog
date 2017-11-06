@@ -4,7 +4,9 @@ namespace TMog.WebApi.Models
 {
     public class Slot
     {
-        public string Name { get; set; }
+        public int SlotNumber { get; set; }
+
+        public string SlotName { get; set; }
 
         public bool Complete { get; set; }
 

@@ -8,7 +8,9 @@
 
         public string SubType { get; set; }
 
-        public string DropLevel { get; set; }
+        public int DropLevel { get; set; }
+
+        public string DropLevelName { get; set; }
 
         public string Description { get; set; }
 

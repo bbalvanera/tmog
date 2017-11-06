@@ -4,10 +4,11 @@ import { Subject } from 'rxjs/Subject';
 
 import { WowheadTooltipService } from '../../../services/wowhead-tooltip.service';
 import { ItemsByZoneService } from '../items-by-zone.service';
-import { Region } from '../../../core/models';
+import { Region } from '../../../common/models';
+import { dropLevelClassMap } from '../../../common/drop-level-class-map';
 
 @Component({
-  selector: 'app-gear',
+  selector: 'app-tracking-gear',
   templateUrl: './gear.component.html',
   styleUrls: ['./gear.component.scss'],
   providers: [ItemsByZoneService]
@@ -23,7 +24,9 @@ export class GearComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.itemsService.all()
       .takeUntil(this.unsubscribe)
-      .subscribe((regions) => this.regions = regions);
+      .subscribe((regions) => {
+        this.regions = regions
+      });
   }
 
   ngOnDestroy() {
@@ -43,14 +46,8 @@ export class GearComponent implements OnInit, OnDestroy {
     }
   }
 
-  public getZoneDifficultyClasses(difficulty: number): {} {
-    return {
-      'q0': difficulty === 0,
-      'q3': difficulty === -1,
-      'q4': difficulty === -2,
-      'q5': difficulty === 1 || difficulty === 2,
-      'q10': difficulty === 3 || difficulty === 4,
-    };
+  public getZoneDifficultyClass(difficulty: number): string {
+    return dropLevelClassMap.get(difficulty) || 'q0';
   }
 
   public getAllDOMIds(items: { id: number }[], prefix: string): string {
