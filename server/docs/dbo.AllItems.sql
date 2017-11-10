@@ -7,12 +7,15 @@ IF EXISTS (
   SELECT * 
     FROM INFORMATION_SCHEMA.ROUTINES 
    WHERE SPECIFIC_SCHEMA = N'dbo'
-     AND SPECIFIC_NAME = N'AllItemsByZone' 
+     AND SPECIFIC_NAME = N'AllItems' 
 )
-   DROP PROCEDURE dbo.AllItemsByZone
+   DROP PROCEDURE dbo.AllItems
 GO
 
-CREATE PROCEDURE dbo.AllItemsByZone
+CREATE PROCEDURE dbo.AllItems
+	@setId int = NULL,
+	@regionId int = NULL,
+	@zoneId int = NULL
 AS
 	SELECT DISTINCT
 		c.RegionId,
@@ -57,9 +60,15 @@ AS
 		JOIN
 			Regions c ON l.RegionId = c.RegionId
 	WHERE
-		z.ZoneId IS NOT NULL AND
-		SUBSTRING(i.Slots, i.Slot + 1, 1) <> '1'
+		z.ZoneId IS NOT NULL
+		AND SUBSTRING(i.Slots, i.Slot + 1, 1) <> '1'
+		AND (
+				(i.SetId = @setId OR @setId IS NULL)
+				AND (z.ZoneId = @zoneId OR @zoneId IS NULL)
+				AND (c.RegionId = @regionId OR @regionId IS NULL)
+			)
+
 	ORDER BY
-		c.RegionId, z.Name, ZoneDifficulty, SetName, i.SetId, Slot
+		c.RegionId, z.Name, ZoneDifficulty, SetName, i.SetId, Slot, i.ItemName
 
 GO

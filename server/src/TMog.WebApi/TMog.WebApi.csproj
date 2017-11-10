@@ -145,7 +145,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
-    <Compile Include="Controllers\ItemsByRegionController.cs" />
+    <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TMogSetsController.cs" />
     <Compile Include="Controllers\ZonesController.cs" />

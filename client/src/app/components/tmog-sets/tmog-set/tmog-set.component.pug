@@ -3,6 +3,7 @@
     h5
       a(href="{{'http://www.wowhead.com/transmog-set=' + model.id}}", target="_blank") {{model.name}}
       button.btn.btn-sm.btn-primary((click)="back()", type="button") Back
+      button.btn.btn-sm.btn-primary([routerLink]="['/tracking/gear']", [queryParams]="{ setId: model.id }", type="button") Switch to tracking view
 ngb-accordion(#slots="ngbAccordion", activeIds="{{getIncompleteSlots()}}", [destroyOnHide]="false", (panelChange)="onSlotChange($event)")
   ngb-panel(*ngFor="let slot of model.slots", [id]="slot.slotNumber.toString()", [type]="slot.complete ? 'success': ''")
     ng-template(ngbPanelTitle)

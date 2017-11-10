@@ -1,6 +1,18 @@
 .region-name, .zone-name {
   color: var(--white);
   text-decoration: none;
+  display: inline-block;
+}
+
+.can-filter {
+  a.filter-icon {
+    color: var(--warning);
+    visibility: hidden;
+  }
+
+  &:hover a.filter-icon {
+    visibility: visible;
+  }
 }
 
 td {

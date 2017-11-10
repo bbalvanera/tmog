@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Region } from '../../common/models';
 import { Settings } from '../../common/settings';
 
 @Injectable()
-export class ItemsByZoneService {
+export class ItemsService {
   private endpoint: string;
 
   constructor(private http: Http, settings: Settings) {
-    this.endpoint = `${settings.apiBaseUrl}/itemsbyregion`;
+    this.endpoint = `${settings.apiBaseUrl}/items`;
   }
 
-  public all(setId?: number): Observable<Region[]> {
-    return this.http.get(this.endpoint)
+  public all(filterBy: string, filterValue: string): Observable<Region[]> {
+    const params = {
+      [filterBy]: filterValue
+    };
+
+    return this.http.get(this.endpoint, { params })
       .map(response => {
         return response.json();
       })

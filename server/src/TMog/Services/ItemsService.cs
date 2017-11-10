@@ -45,11 +45,11 @@ namespace TMog.Services
             return results;
         }
 
-        public async Task<IEnumerable<ZonesByRegion>> GetAllItemsByRegion() => await Execute("dbo.AllItemsByZone");
+        public async Task<IEnumerable<ZonesByRegion>> GetAllItemsBySet(int setId) => await Execute("dbo.AllItems @p0, @p1, @p2", setId, null, null);
 
-        public async Task<IEnumerable<ZonesByRegion>> GetAllSetItemsByZone(int setId) => await Execute("dbo.AllSetItemsByZone @p0", setId);
+        public async Task<IEnumerable<ZonesByRegion>> GetAllItemsByRegion(int? regionId = null) => await Execute("dbo.AllItems @p0, @p1, @p2", null, regionId, null);
 
-        public async Task<IEnumerable<ZonesByRegion>> GetAllItemsInZone(int zoneId) => await Execute("dbo.AllItemsInZone @p0", zoneId);
+        public async Task<IEnumerable<ZonesByRegion>> GetAllItemsByZone(int zoneId) => await Execute("dbo.AllItems @p0, @p1, @p2", null, null, zoneId);
 
         public async Task<IEnumerable<ZonesByRegion>> GetAllBuyableItemsByZone() => await Execute("dbo.AllBuyableItemsByZone");
 

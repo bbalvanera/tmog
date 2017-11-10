@@ -11,11 +11,11 @@ namespace TMog.Services
 
         Task<IEnumerable<Item>> SearchItems(string query);
 
-        Task<IEnumerable<ZonesByRegion>> GetAllItemsByRegion();
+        Task<IEnumerable<ZonesByRegion>> GetAllItemsByRegion(int? regionId = null);
 
-        Task<IEnumerable<ZonesByRegion>> GetAllSetItemsByZone(int setId);
+        Task<IEnumerable<ZonesByRegion>> GetAllItemsBySet(int setId);
 
-        Task<IEnumerable<ZonesByRegion>> GetAllItemsInZone(int zoneId);
+        Task<IEnumerable<ZonesByRegion>> GetAllItemsByZone(int zoneId);
 
         Task<IEnumerable<ZonesByRegion>> GetAllBuyableItemsByZone();
     }

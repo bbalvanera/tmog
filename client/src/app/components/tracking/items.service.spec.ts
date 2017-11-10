@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ItemsByZoneService } from './items-by-zone.service';
+import { ItemsByRegionService } from './items-by-region.service';
 
 describe('ItemsByZoneService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ItemsByZoneService]
+      providers: [ItemsByRegionService]
     });
   });
 
-  it('should be created', inject([ItemsByZoneService], (service: ItemsByZoneService) => {
+  it('should be created', inject([ItemsByRegionService], (service: ItemsByRegionService) => {
     expect(service).toBeTruthy();
   }));
 });

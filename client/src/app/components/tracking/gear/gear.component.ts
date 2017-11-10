@@ -1,9 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChildren } from '@angular/core';
-import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { NgbAccordion, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 
 import { WowheadTooltipService } from '../../../services/wowhead-tooltip.service';
-import { ItemsByZoneService } from '../items-by-zone.service';
+import { ItemsService } from '../items.service';
 import { Region } from '../../../common/models';
 import { dropLevelClassMap } from '../../../common/drop-level-class-map';
 
@@ -11,27 +15,56 @@ import { dropLevelClassMap } from '../../../common/drop-level-class-map';
   selector: 'app-tracking-gear',
   templateUrl: './gear.component.html',
   styleUrls: ['./gear.component.scss'],
-  providers: [ItemsByZoneService]
+  providers: [ItemsService, Location]
 })
 export class GearComponent implements OnInit, OnDestroy {
-  private unsubscribe = new Subject<void>();
+  private setId: number;
+  private subscriptions = <Subscription[]>[];
+  private fetchingData = false; // used to prevent accordion collapse by signaling the event handler and preventingDefault
   @ViewChildren(NgbAccordion) private accordions: NgbAccordion[];
 
-  public regions: Region[];
+  public hasRegions = new Subject<boolean>();
+  public regions = <Region[]>[];
 
-  constructor(private itemsService: ItemsByZoneService, private wowheadTooltipService: WowheadTooltipService) { }
+  constructor(
+    private itemsService: ItemsService,
+    private wowheadTooltipService: WowheadTooltipService,
+    private activatedRoute: ActivatedRoute,
+    private location: Location) {
+  }
 
   ngOnInit() {
-    this.itemsService.all()
-      .takeUntil(this.unsubscribe)
-      .subscribe((regions) => {
-        this.regions = regions
-      });
+    const validParams = ['setid', 'zoneid', 'regionid', ''];
+
+    this.subscriptions.push(
+      this.activatedRoute.queryParams
+        .filter(params => {
+          const param = (Object.keys(params)[0] || '').toLowerCase();
+          return validParams.some(valid => param === valid);
+        }).flatMap(param => {
+          this.fetchingData = true;
+
+          const filter = Object.keys(param)[0];
+          const value  = Object.values(param)[0];
+
+          return this.itemsService.all(filter, value);
+        }).subscribe(regions => {
+          this.regions = regions;
+          this.hasRegions.next(regions && regions.length > 0);
+
+          this.fetchingData = false;
+        })
+    )
   }
 
   ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+      subscription = null;
+    });
+
+    this.subscriptions = [];
+    this.hasRegions.complete();
   }
 
   public getZoneDifficultyName(difficulty: number): string {
@@ -84,5 +117,14 @@ export class GearComponent implements OnInit, OnDestroy {
       });
       accordion.activeIds = allIds;
     });
+  }
+
+  public onPanelChange($event: NgbPanelChangeEvent) {
+    this.fetchingData ? $event.preventDefault() : void 0;
+  }
+
+  public goBack(): boolean {
+    this.location.back();
+    return false;
   }
 }
