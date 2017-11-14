@@ -3,7 +3,6 @@ ng-template(ngbModalContainer)
   .card-body
     h5 Transmogrification Sets
       button.btn.btn-primary.btn-sm((click)="newSet(content)", type="button") Add new set
-      button.btn.btn-primary.btn-sm([routerLink]="['/tracking/gear']", type="button") Tracking view
 .alert.alert-danger(*ngIf="error")
   strong {{error.shortText}}
   p {{error.message}}
