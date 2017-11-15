@@ -1,7 +1,7 @@
 .card.card-inverse.card-primary.text-xs-center.page-title
   .card-body
     h4 Search results
-table.table(*ngIf="model && model.length > 0")
+table.table(*ngIf="hasSearchResults | async")
   thead
     tr
       th Item name
@@ -14,7 +14,7 @@ table.table(*ngIf="model && model.length > 0")
         div(*ngFor="let set of item.sets")
           a(rel="transmog-set={{set.id}}", [routerLink]="['/tmog-set', set.id]", (click)="dismissTooltip()") {{set.name}}
         span.text-warning(*ngIf="!item.sets|| item.sets.length === 0") Item does not belong to any tracked set.
-.card.card-outline-warning(*ngIf="model.length === 0 && searchTerm")
+.card.card-outline-warning(*ngIf="(hasSearchResults | async) === false")
   .card-body
     h2 Could not find anything matching&nbsp;
       em {{searchTerm}}
