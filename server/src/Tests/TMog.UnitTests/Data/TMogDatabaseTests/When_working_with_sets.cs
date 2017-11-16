@@ -26,7 +26,7 @@ namespace TMog.UnitTests.Data.TMogDatabaseTests
         }
 
         [TestMethod]
-        public void should_insert_new_set()
+        public void Should_insert_new_set()
         {
             var set = new Set
             {

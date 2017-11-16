@@ -8,12 +8,12 @@ namespace TMog.Data.Configuration
     {
         public SetEntityConfiguration()
         {
-            HasKey(s => s.SetId);
+            HasKey(e => e.SetId);
 
-            Property(s => s.Name).IsRequired();
-            Property(s => s.SetId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(e => e.Name).IsRequired();
+            Property(e => e.SetId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            HasMany(s => s.Items).WithMany(i => i.Sets).Map(config => config.MapLeftKey("SetId").MapRightKey("ItemId").ToTable("SetItems"));
+            HasMany(e => e.Items).WithMany(e => e.Sets).Map(config => config.MapLeftKey("SetId").MapRightKey("ItemId").ToTable("SetItems"));
         }
     }
 }

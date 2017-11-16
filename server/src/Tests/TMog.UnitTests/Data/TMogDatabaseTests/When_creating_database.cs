@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace TMog.UnitTests.Data.TMogDatabaseTests
 {
@@ -9,6 +9,7 @@ namespace TMog.UnitTests.Data.TMogDatabaseTests
         [TestMethod]
         public void Should_create_database()
         {
+            // expect no errors here.
             Subject.Sets.Select(i => i);
         }
     }

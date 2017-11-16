@@ -63,6 +63,7 @@
     <Compile Include="Data\Common\PairMapper.cs" />
     <Compile Include="Data\Configuration\ItemEntityConfiguration.cs" />
     <Compile Include="Data\Configuration\LocationEntityConfiguration.cs" />
+    <Compile Include="Data\Configuration\RegionEntityConfiguration.cs" />
     <Compile Include="Data\Configuration\SetEntityConfiguration.cs" />
     <Compile Include="Data\Configuration\SourceEntityConfiguration.cs" />
     <Compile Include="Data\Configuration\TMogDbInitializer.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Entities\ItemInfo.cs" />
     <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\QualityType.cs" />
+    <Compile Include="Entities\Region.cs" />
     <Compile Include="Entities\Set.cs" />
     <Compile Include="Entities\SlotType.cs" />
     <Compile Include="Entities\Source.cs" />

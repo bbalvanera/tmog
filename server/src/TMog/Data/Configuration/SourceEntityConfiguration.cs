@@ -7,7 +7,7 @@ namespace TMog.Data.Configuration
     {
         public SourceEntityConfiguration()
         {
-            HasKey(s => s.SourceId);
+            HasKey(e => e.SourceId);
         }
     }
 }

@@ -8,8 +8,10 @@ namespace TMog.Data.Configuration
     {
         public LocationEntityConfiguration()
         {
-            HasKey(l => l.LocationId);
-            Property(l => l.LocationId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            HasKey(e => e.LocationId);
+            Property(e => e.LocationId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
+            HasRequired(e => e.Region).WithMany().Map(config => config.MapKey("RegionId"));
         }
     }
 }

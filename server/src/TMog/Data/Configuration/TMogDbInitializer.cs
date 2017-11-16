@@ -2,7 +2,7 @@
 
 namespace TMog.Data.Configuration
 {
-    internal class TMogDbInitializer : DropCreateDatabaseIfModelChanges<TMogDatabase>//MigrateDatabaseToLatestVersion<TMogDatabase, MigrationConfiguration>
+    internal class TMogDbInitializer : DropCreateDatabaseIfModelChanges<TMogDatabase>
     {
     }
 }

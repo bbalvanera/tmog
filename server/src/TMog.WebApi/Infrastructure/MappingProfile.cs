@@ -45,7 +45,7 @@ namespace TMog.WebApi.Infrastructure
                 .ForMember(target => target.Name, opt => opt.MapFrom(source => source.ZoneName))
                 .ForMember(target => target.Difficulty, opt => opt.MapFrom(source => source.ZoneDifficulty));
 
-            CreateMap<Entities.Views.ZonesByRegion, Region>()
+            CreateMap<Entities.Views.ZonesByRegion, Models.Region>()
                 .ForMember(target => target.Id, opt => opt.MapFrom(source => source.RegionId))
                 .ForMember(target => target.Name, opt => opt.MapFrom(source => source.RegionName));
         }

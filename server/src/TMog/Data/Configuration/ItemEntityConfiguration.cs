@@ -8,8 +8,10 @@ namespace TMog.Data.Configuration
     {
         public ItemEntityConfiguration()
         {
-            HasKey(i => i.ItemId).Property(i => i.ItemId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            HasOptional(i => i.Source).WithMany().Map(map => map.MapKey("SourceId"));
+            HasKey(e => e.ItemId);
+            Property(e => e.ItemId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
+            HasOptional(e => e.Source).WithMany().Map(config => config.MapKey("SourceId"));
         }
     }
 }
