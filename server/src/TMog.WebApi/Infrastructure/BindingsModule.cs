@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Ninject;
-using Ninject.Modules;
+﻿using Ninject.Modules;
 using TMog.Data;
 using TMog.Services;
 using TMog.WowApi;
@@ -22,16 +20,6 @@ namespace TMog.WebApi.Infrastructure
             Bind<ISetsService>().To<SetsService>();
             Bind<IZonesService>().To<ZonesService>();
             Bind<IItemsService>().To<ItemsService>();
-
-            SetAutoMapperBindings();
-        }
-
-        private void SetAutoMapperBindings()
-        {
-            Mapper.Initialize(config => 
-            {
-                config.ConstructServicesUsing(type => Kernel.Get(type));
-            });
         }
     }
 }
