@@ -1,12 +1,12 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
-using HtmlAgilityPack;
-using Newtonsoft.Json;
 using TMog.WowheadApi.Infrastructure;
 
 namespace TMog.WowheadApi
@@ -16,7 +16,7 @@ namespace TMog.WowheadApi
         private const string WOWHEAD_ITEM_URI_TEMPLATE = "http://www.wowhead.com/item={0}&xml";
         private const string WOWHEAD_SET_URI_TEMPLATE = "http://www.wowhead.com/transmog-set={0}&xml";
         private const string SET_NAME_XPATH = "//div[@class='text']/h1[@class='heading-size-1']";
-        private const string SET_NOTFOUND_XPATH = "//div[@id='inputbox-error']";
+        private const string SET_NOTFOUND_XPATH = "//div[@class='database-detail-page-not-found-message']";
         private const string ITEM_ID_XPATH = "//div[@id='transmog']//li/a[@href]";
 
         public async Task<IWowheadItem> GetItemById(int itemId)
