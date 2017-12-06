@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
@@ -17,7 +18,19 @@ namespace TMog.WebApi.Controllers
                 parameters.Append($"Key: {item.Key} Value: {item.Value} | ");
             }
 
-            return $"{DateTime.Now.ToString("F")}. Up and running on {Environment.OSVersion.ToString()}. Parameters: {parameters}";
+            var output = new StringBuilder();
+
+            output.Append(DateTime.Now.ToString("F"));
+            output.Append($". Up and running on {Environment.OSVersion.ToString()}. ");
+
+            for (int i = 0; i < ConfigurationManager.ConnectionStrings.Count; i++)
+            {
+                output.Append($"Connection string #{i}: {ConfigurationManager.ConnectionStrings[i].ConnectionString}. ");
+            }
+            
+            output.Append($"Parameters: {parameters}");
+
+            return output.ToString();
         }
     }
 }
