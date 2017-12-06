@@ -54,7 +54,7 @@ export class GearComponent implements OnInit, OnDestroy {
 
           this.fetchingData = false;
         })
-    )
+    );
   }
 
   ngOnDestroy() {
@@ -120,7 +120,9 @@ export class GearComponent implements OnInit, OnDestroy {
   }
 
   public onPanelChange($event: NgbPanelChangeEvent) {
-    this.fetchingData ? $event.preventDefault() : void 0;
+    if (this.fetchingData) {
+      $event.preventDefault();
+    }
   }
 
   public goBack(): boolean {

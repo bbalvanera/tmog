@@ -2,7 +2,7 @@ ng-template(ngbModalContainer)
 .card.card-outline-secondary.page-title
   .card-body
     h5 Transmogrification Sets
-      button.btn.btn-primary.btn-sm((click)="newSet(content)", type="button") Add new set
+      button.btn.btn-primary.btn-sm((click)="newSet()", type="button") Add new set
 .alert.alert-danger(*ngIf="error")
   strong {{error.shortText}}
   p {{error.message}}
