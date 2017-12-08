@@ -9,8 +9,8 @@ namespace TMog.UnitTests.Data.TMogDatabaseTests
         [TestMethod]
         public void Should_create_database()
         {
-            // expect no errors here.
-            Subject.Sets.Select(i => i);
+            // Select will force a connection to database
+            Subject.Sets.Select(i => i); // expect no errors
         }
     }
 }

@@ -9,7 +9,8 @@ namespace TMog.Services.Infrastructure
         {
             CreateMap<IWowZone, Zone>()
                 .ForMember(zone => zone.ZoneId, opt => opt.MapFrom(zone => zone.Id))
-                .ForMember(zone => zone.Location, opt => opt.Ignore())
+                .ForMember(zone => zone.Parent, opt => opt.Ignore())
+                .ForMember(zone => zone.Region, opt => opt.Ignore())
                 .ForMember(zone => zone.Type, opt => opt.ResolveUsing(zone => 
                 {
                     if (zone.IsDungeon)
@@ -22,10 +23,8 @@ namespace TMog.Services.Infrastructure
                         return ZoneType.Raid;
                     }
 
-                    return ZoneType.Normal;
+                    return ZoneType.Zone;
                 }));
-            CreateMap<IWowLocation, Location>()
-                .ForMember(location => location.LocationId, opt => opt.MapFrom(location => location.Id));
         }
     }
 }

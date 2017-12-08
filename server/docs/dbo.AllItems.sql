@@ -18,8 +18,8 @@ CREATE PROCEDURE dbo.AllItems
 	@zoneId int = NULL
 AS
 	SELECT DISTINCT
-		c.RegionId,
-		c.Name RegionName,
+		ISNULL(r1.RegionId, r2.RegionId) RegionId,
+		ISNULL(r1.[Name], r2.[Name]) RegionName,
 		z.ZoneId,
 		z.Name ZoneName,
 		IsNull(s.DropLevel, -1) ZoneDifficulty,
@@ -44,31 +44,38 @@ AS
 			i.Slot,
 			i.Quality,
 			i.SourceId
-		 FROM
+		FROM
 			[Sets] s
-		 JOIN
+		JOIN
 			SetItems si ON s.SetId = si.SetId
-		 JOIN
+		JOIN
 			Items i ON si.ItemId = i.ItemId
+		WHERE SUBSTRING(s.Slots, i.Slot + 1, 1) <> '1'
 		) AS i
 		LEFT JOIN
 			Sources s ON i.SourceId = s.SourceId
 		LEFT JOIN
 			Zones z ON s.ZoneId = z.ZoneId
 		LEFT JOIN
-			Locations l ON z.LocationId = l.LocationId
-		JOIN
-			Regions c ON l.RegionId = c.RegionId
+			Regions r1 ON z.RegionId = r1.RegionId
+		LEFT JOIN
+			Zones l ON z.ParentZoneId = l.ZoneId
+		LEFT JOIN
+			Regions r2 ON l.RegionId = r2.RegionId
 	WHERE
 		z.ZoneId IS NOT NULL
-		AND SUBSTRING(i.Slots, i.Slot + 1, 1) <> '1'
+		AND s.[Type] = 2 --DROP
 		AND (
 				(i.SetId = @setId OR @setId IS NULL)
 				AND (z.ZoneId = @zoneId OR @zoneId IS NULL)
-				AND (c.RegionId = @regionId OR @regionId IS NULL)
+				AND ((r1.RegionId = @regionId OR r2.RegionID = @regionId OR @regionId IS NULL))
 			)
 
 	ORDER BY
-		c.RegionId, z.Name, ZoneDifficulty, SetName, i.SetId, Slot, i.ItemName
+		RegionId, z.Name, ZoneDifficulty, SetName, i.SetId, Slot, i.ItemName
+
+GO
+
+GRANT EXECUTE ON dbo.Allitems TO [LAPTOP-01\tmog]
 
 GO

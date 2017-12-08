@@ -36,9 +36,9 @@
   }
   export interface Zone {
     id?: number;
-    locationId?: number;
-    locationName?: string;
     name?: string;
+    parentId?: number;
+    parentZoneName?: string;
   }
   export interface ZoneItem {
     itemId?: number;

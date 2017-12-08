@@ -6,8 +6,8 @@
 
         public string Name { get; set; }
 
-        public int? LocationId { get; set; }
+        public int? ParentId { get; set; }
 
-        public string LocationName { get; set; }
+        public string ParentZoneName { get; set; }
     }
 }

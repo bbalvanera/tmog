@@ -21,7 +21,7 @@ namespace TMog.WebApi.Controllers
             var output = new StringBuilder();
 
             output.Append(DateTime.Now.ToString("F"));
-            output.Append($". Up and running on {Environment.OSVersion.ToString()}. ");
+            output.Append($". Up and running on {Environment.OSVersion.ToString()} - {ConfigurationManager.AppSettings["Env"]}. ");
 
             for (int i = 0; i < ConfigurationManager.ConnectionStrings.Count; i++)
             {

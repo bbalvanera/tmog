@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TMog.WowheadApi;
 
 namespace TMog.UnitTests.WowheadApi
@@ -34,7 +34,7 @@ namespace TMog.UnitTests.WowheadApi
                 Assert.AreEqual("Bracers of Just Rewards", result.Name);
                 Assert.AreEqual(3, result.Quality);
                 Assert.AreEqual(70, result.RequiredLevel);
-                Assert.AreEqual(29989, result.SellPrice);
+                Assert.AreEqual(26095, result.SellPrice);
                 Assert.AreEqual(9, result.Slot);
                 Assert.AreEqual(1, result.Sources.Count());
                 Assert.AreEqual(4, result.Subclass);

@@ -1,6 +1,5 @@
-﻿using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 using TMog.Data;
 using TMog.WowheadApi;
 
@@ -9,12 +8,6 @@ namespace TMog.UnitTests.Services.ItemsServiceTests
     [TestClass]
     public class When_searching_items : ItemsServiceTestHelper
     {
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            Mapper.Initialize(config => config.AddProfiles("TMog"));
-        }
-
         [TestMethod]
         public async Task should_search_by_item_id()
         {

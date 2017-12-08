@@ -54,8 +54,9 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\..\bin\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\..\..\bin\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\bin\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -117,6 +118,10 @@
     <Folder Include="WebApi\Controllers\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\TMog.WebApi\TMog.WebApi.csproj">
+      <Project>{f8058b1a-9403-4650-8b09-4cb380cc2ee5}</Project>
+      <Name>TMog.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\TMog\TMog.csproj">
       <Project>{469baffe-6a8a-46e6-a6f0-b42e6e8c2f2e}</Project>
       <Name>TMog</Name>

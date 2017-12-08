@@ -2,8 +2,14 @@
 {
     public enum ZoneType
     {
-        Normal,
+        Arena,
+        ArtifactAcquisition,
+        Battleground,
+        ClassHall,
         Dungeon,
-        Raid
+        Raid,
+        Scenario,
+        Transit,
+        Zone // a.k.a. open world
     }
 }

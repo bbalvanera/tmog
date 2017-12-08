@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using TMog.Entities;
 using TMog.WowheadApi;
 
@@ -9,12 +9,6 @@ namespace TMog.UnitTests.Services.Infrastructure.WowheadSetMapProfileTests
     [TestClass]
     public class When_mapping_from_wowheadItem
     {
-        [TestInitialize]
-        public virtual void TestInitialize()
-        {
-            Mapper.Initialize(config => config.AddProfiles("TMog"));
-        }
-
         [TestMethod]
         public void should_map_correctly()
         {

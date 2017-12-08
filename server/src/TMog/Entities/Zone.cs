@@ -8,6 +8,8 @@
 
         public ZoneType Type { get; set; }
 
-        public Location Location { get; set; }
+        public Zone Parent { get; set; }
+
+        public Region Region { get; set; }
     }
 }

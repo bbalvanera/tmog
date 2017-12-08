@@ -6,7 +6,5 @@ namespace TMog.Services
     public interface IZonesService
     {
         Task<Zone> GetOrCreateZone(int? zoneId);
-
-        Task LoadZonesFromWowApi();
     }
 }

@@ -11,7 +11,8 @@ namespace TMog.Data.Configuration
             HasKey(e => e.ZoneId);
             Property(e => e.ZoneId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            HasOptional(e => e.Location).WithMany().Map(config => config.MapKey("LocationId"));
+            HasOptional(e => e.Parent).WithMany().Map(config => config.MapKey("ParentZoneId"));
+            HasOptional(e => e.Region).WithMany().Map(config => config.MapKey("RegionId"));
         }
     }
 }

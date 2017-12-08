@@ -15,8 +15,6 @@ namespace TMog.Data
 
         IDbSet<Zone> Zones { get; }
 
-        IDbSet<Location> Locations { get; }
-
         IDbSet<Region> Regions { get; }
 
         Task<IEnumerable<T>> Execute<T>(string name, params object[] parameters);

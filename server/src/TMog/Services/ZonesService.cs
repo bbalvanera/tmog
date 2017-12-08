@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using TMog.Data;
 using TMog.Entities;
 using TMog.WowApi;
@@ -27,36 +25,6 @@ namespace TMog.Services
             }
 
             return await Task.FromResult(result);
-        }
-
-        public async Task LoadZonesFromWowApi()
-        {
-            var wowZones = await wowProvider.GetAllZones();
-
-            if (wowZones == null || !wowZones.Any())
-            {
-                return;
-            }
-
-            foreach (var wowZone in wowZones)
-            {
-                var zone = Mapper.Map<Zone>(wowZone);
-                zone.Location = GetOrCreateLocation(wowZone.Location);
-
-                tmogContext.Zones.Add(zone);
-            }
-
-            tmogContext.SaveChanges();
-        }
-
-        private Location GetOrCreateLocation(IWowLocation location)
-        {
-            if (location == null)
-            {
-                return null;
-            }
-
-            return tmogContext.Locations.Find(location.Id) ?? tmogContext.Locations.Add(Mapper.Map<Location>(location));
         }
     }
 }

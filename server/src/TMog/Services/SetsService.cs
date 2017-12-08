@@ -27,7 +27,7 @@ namespace TMog.Services
         public async Task<Set> GetById(int setId)
         {
             return await tmogContext.Sets
-                .Include(s => s.Items.Select(i => i.Source.Zone.Location))
+                .Include(s => s.Items.Select(i => i.Source.Zone.Parent))
                 .FirstOrDefaultAsync(s => s.SetId == setId);
         }
 

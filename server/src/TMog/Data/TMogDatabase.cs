@@ -13,17 +13,15 @@ namespace TMog.Data
             Database.SetInitializer(new TMogDbInitializer());
         }
 
-        public IDbSet<Set> Sets { get; set; }
+        public virtual IDbSet<Set> Sets { get; set; }
 
-        public IDbSet<Item> Items { get; set; }
+        public virtual IDbSet<Item> Items { get; set; }
 
-        public IDbSet<Source> Sources { get; set; }
+        public virtual IDbSet<Source> Sources { get; set; }
 
-        public IDbSet<Zone> Zones { get; set; }
-        
-        public IDbSet<Location> Locations { get; set; }
+        public virtual IDbSet<Zone> Zones { get; set; }
 
-        public IDbSet<Region> Regions { get; set; }
+        public virtual IDbSet<Region> Regions { get; set; }
 
         public async Task<IEnumerable<T>> Execute<T>(string name, params object[] parameters)
         {
@@ -36,7 +34,6 @@ namespace TMog.Data
             modelBuilder.Configurations.Add(new ItemEntityConfiguration());
             modelBuilder.Configurations.Add(new SourceEntityConfiguration());
             modelBuilder.Configurations.Add(new ZoneEntityConfiguration());
-            modelBuilder.Configurations.Add(new LocationEntityConfiguration());
             modelBuilder.Configurations.Add(new RegionEntityConfiguration());
         }
     }
