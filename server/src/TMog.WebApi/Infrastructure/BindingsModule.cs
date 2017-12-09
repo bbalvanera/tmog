@@ -20,6 +20,7 @@ namespace TMog.WebApi.Infrastructure
             Bind<ISetsService>().To<SetsService>();
             Bind<IZonesService>().To<ZonesService>();
             Bind<IItemsService>().To<ItemsService>();
+            Bind<IFactionsService>().To<FactionsService>();
         }
     }
 }

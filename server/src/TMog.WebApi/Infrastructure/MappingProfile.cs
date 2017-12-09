@@ -36,6 +36,10 @@ namespace TMog.WebApi.Infrastructure
                 .ForMember(target => target.ParentZoneName, opt => opt.ResolveUsing(source => source.Parent?.Name))
                 .ForMember(target => target.ParentId, opt => opt.ResolveUsing(source => source.Parent?.ZoneId));
 
+            CreateMap<Entities.Faction, Models.Faction>()
+                .ForMember(target => target.Id, opt => opt.MapFrom(source => source.FactionId))
+                .ReverseMap();
+
             CreateMap<Entities.Views.ZoneItem, ZoneItem>()
                 .ForMember(target => target.Slot, opt => opt.ResolveUsing(source => source.Slot.GetDisplayValue()))
                 .ForMember(target => target.SourceType, opt => opt.ResolveUsing(source => source.SourceType?.GetDisplayValue()))
@@ -49,6 +53,8 @@ namespace TMog.WebApi.Infrastructure
             CreateMap<Entities.Views.ZonesByRegion, Models.Region>()
                 .ForMember(target => target.Id, opt => opt.MapFrom(source => source.RegionId))
                 .ForMember(target => target.Name, opt => opt.MapFrom(source => source.RegionName));
+
+            
         }
     }
 }

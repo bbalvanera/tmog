@@ -13,10 +13,10 @@ namespace TMog.Services
 {
     public class SetsService : ISetsService
     {
-        private readonly TMogDatabase tmogContext;
+        private readonly ITMogDatabase tmogContext;
         private readonly IWowheadProvider wowheadProvider;
 
-        public SetsService(TMogDatabase tmogContext, IWowheadProvider wowheadProvider)
+        public SetsService(ITMogDatabase tmogContext, IWowheadProvider wowheadProvider)
         {
             this.tmogContext = tmogContext;
             this.wowheadProvider = wowheadProvider;
@@ -67,7 +67,7 @@ namespace TMog.Services
         {
             if (await tmogContext.Sets.AnyAsync(set => set.SetId == setId))
             {
-                tmogContext.Entry(new Set { SetId = setId }).State = EntityState.Deleted;
+                tmogContext.MarkEntityForDeletion(new Set { SetId = setId });
             }
 
             await tmogContext.SaveChangesAsync();

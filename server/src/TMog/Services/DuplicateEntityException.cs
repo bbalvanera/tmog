@@ -4,7 +4,7 @@ namespace TMog.Services
 {
 
     [Serializable]
-    public class DuplicateEntityException : Exception
+    public class DuplicateEntityException : SystemException
     {
         public DuplicateEntityException() { }
         public DuplicateEntityException(string message) : base(message) { }

@@ -23,9 +23,26 @@ namespace TMog.Data
 
         public virtual IDbSet<Region> Regions { get; set; }
 
+        public virtual IDbSet<Faction> Factions { get; set; }
+
+        public void DisableChangeDetection()
+        {
+            this.Configuration.AutoDetectChangesEnabled = false;
+        }
+
+        public void EnableChangeDetection()
+        {
+            this.Configuration.AutoDetectChangesEnabled = true;
+        }
+
         public async Task<IEnumerable<T>> Execute<T>(string name, params object[] parameters)
         {
             return await Database.SqlQuery<T>(name, parameters).ToListAsync();
+        }
+
+        public void MarkEntityForDeletion<TEntity>(TEntity entity) where TEntity : class
+        {
+            Entry(entity).State = EntityState.Deleted;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -35,6 +52,7 @@ namespace TMog.Data
             modelBuilder.Configurations.Add(new SourceEntityConfiguration());
             modelBuilder.Configurations.Add(new ZoneEntityConfiguration());
             modelBuilder.Configurations.Add(new RegionEntityConfiguration());
+            modelBuilder.Configurations.Add(new FactionEntityConfiguration());
         }
     }
 }

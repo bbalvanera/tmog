@@ -7,10 +7,10 @@ namespace TMog.Services
 {
     public class ZonesService : IZonesService
     {
-        private readonly TMogDatabase tmogContext;
+        private readonly ITMogDatabase tmogContext;
         private readonly IWowProvider wowProvider;
 
-        public ZonesService(TMogDatabase tmogContext, IWowProvider wowProvider)
+        public ZonesService(ITMogDatabase tmogContext, IWowProvider wowProvider)
         {
             this.tmogContext = tmogContext;
             this.wowProvider = wowProvider;

@@ -61,27 +61,34 @@ namespace TMog.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -- =============================================
-        ///-- Create basic stored procedure template
-        ///-- =============================================
-        ///
-        ///-- Drop stored procedure if it already exists
-        ///IF EXISTS (
-        ///  SELECT * 
-        ///    FROM INFORMATION_SCHEMA.ROUTINES 
-        ///   WHERE SPECIFIC_SCHEMA = N&apos;dbo&apos;
-        ///     AND SPECIFIC_NAME = N&apos;AllItems&apos; 
-        ///)
-        ///   DROP PROCEDURE dbo.AllItems
-        ///GO
-        ///
-        ///CREATE PROCEDURE dbo.AllItems
-        ///	@setId int = NULL,
-        ///	@regionId int = NULL,
-        ///	@zoneId int = NULL
+        ///   Looks up a localized string similar to DELETE Factions.
+        /// </summary>
+        internal static string ClearFactions {
+            get {
+                return ResourceManager.GetString("ClearFactions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CREATE PROCEDURE dbo.AllItems
+        ///    @setId int = NULL,
+        ///    @regionId int = NULL,
+        ///    @zoneId int = NULL
         ///AS
-        ///	SELECT DISTINCT
-        ///		ISNULL(r1.RegionId, [rest of string was truncated]&quot;;.
+        ///    SELECT DISTINCT
+        ///        ISNULL(r1.RegionId, r2.RegionId) RegionId,
+        ///        ISNULL(r1.[Name], r2.[Name]) RegionName,
+        ///        z.ZoneId,
+        ///        z.Name ZoneName,
+        ///        IsNull(s.DropLevel, -1) ZoneDifficulty,
+        ///        i.SetId,
+        ///        i.Name SetName,
+        ///        i.Slots SetSlots,
+        ///        i.ItemId,
+        ///        i.ItemName ItemName,
+        ///        i.Quality ItemQuality,
+        ///        i.Slot,
+        ///        s.Wowhead [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string dbo_AllItems {
             get {
