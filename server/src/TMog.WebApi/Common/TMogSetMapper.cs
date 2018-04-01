@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
 using System.Linq;
-using TMog.Business;
+using TMog.Common;
 using TMog.WebApi.Models;
 
 namespace TMog.WebApi.Common

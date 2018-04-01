@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using TMog.Business;
+using TMog.Common;
 using TMog.Services;
 using TMog.WebApi.Models;
 

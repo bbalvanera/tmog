@@ -25,6 +25,12 @@ namespace TMog.Data
 
         public virtual IDbSet<Faction> Factions { get; set; }
 
+        public virtual IDbSet<WorldQuest> WorldQuests { get; set; }
+
+        public virtual IDbSet<WorldQuestInstance> WordQuestInstances { get; set; }
+
+        public virtual IDbSet<WorldQuestsSubmissionLog> WorldQuestsSubmissionLogs { get; set; }
+
         public void DisableChangeDetection()
         {
             this.Configuration.AutoDetectChangesEnabled = false;
@@ -53,6 +59,10 @@ namespace TMog.Data
             modelBuilder.Configurations.Add(new ZoneEntityConfiguration());
             modelBuilder.Configurations.Add(new RegionEntityConfiguration());
             modelBuilder.Configurations.Add(new FactionEntityConfiguration());
+            modelBuilder.Configurations.Add(new QuestEntityConfiguration());
+            modelBuilder.Configurations.Add(new WorldQuestEntityConfiguration());
+            modelBuilder.Configurations.Add(new WorldQuestInstanceEntityConfiguration());
+            modelBuilder.Configurations.Add(new WorldQuestSubmissionLogEntityConfiguration());
         }
     }
 }

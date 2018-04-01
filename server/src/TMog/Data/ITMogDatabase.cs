@@ -19,6 +19,12 @@ namespace TMog.Data
 
         IDbSet<Faction> Factions { get; }
 
+        IDbSet<WorldQuest> WorldQuests { get; }
+
+        IDbSet<WorldQuestInstance> WordQuestInstances { get; }
+
+        IDbSet<WorldQuestsSubmissionLog> WorldQuestsSubmissionLogs { get; }
+
         Task<IEnumerable<T>> Execute<T>(string name, params object[] parameters);
 
         void MarkEntityForDeletion<TEntity>(TEntity entity) where TEntity: class;

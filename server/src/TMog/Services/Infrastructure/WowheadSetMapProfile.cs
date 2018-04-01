@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using TMog.Business;
+using TMog.Common;
 using TMog.Entities;
 using TMog.WowheadApi;
 

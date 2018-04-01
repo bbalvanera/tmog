@@ -1,0 +1,27 @@
+{
+  "name": "world-quest-service",
+  "version": "1.0.0",
+  "description": "\"A service to process WoW World Quests with the help of WowHead\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bernardo Balvanera <bernardo.balvanera@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^8.0.57",
+    "@types/phantom": "^3.2.3",
+    "@types/request": "^2.0.8",
+    "@types/request-promise-native": "^1.0.10",
+    "@types/yargs": "^10.0.0",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "mailgun-js": "^0.13.1",
+    "phantom": "^4.0.11",
+    "request": "^2.83.0",
+    "request-promise-native": "^1.0.5",
+    "winston": "^3.0.0-rc1",
+    "yargs": "^10.0.3"
+  }
+}

@@ -35,8 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=6.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\..\..\bin\AutoMapper.6.2.1\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\..\bin\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\..\bin\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
@@ -92,6 +92,8 @@
     <Compile Include="Data\TMogDatabaseTests\TMogDatabaseTestHelper.cs" />
     <Compile Include="Data\TMogDatabaseTests\When_creating_database.cs" />
     <Compile Include="Data\TMogDatabaseTests\When_working_with_sets.cs" />
+    <Compile Include="Infrastructure\When_initializing_mapper_config.cs" />
+    <Compile Include="Infrastructure\When_mapping_from_api.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Infrastructure\WowheadSetMapProfileTests\When_initializing_mapper_config.cs" />
     <Compile Include="Services\Infrastructure\WowheadSetMapProfileTests\When_mapping_from_wowheadItem.cs" />

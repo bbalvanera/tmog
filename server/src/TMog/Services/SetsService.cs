@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using TMog.Business;
+using TMog.Common;
 using TMog.Data;
 using TMog.Entities;
 using TMog.WowheadApi;

@@ -1,0 +1,40 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run poc",
+      "program": "${workspaceFolder}/dist/poc.js",
+      "stopOnEntry": true,
+      "args": ["--zones"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run zones",
+      "program": "${workspaceFolder}/dist/main.js",
+      "stopOnEntry": true,
+      "args": ["--zones"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run wq",
+      "program": "${workspaceFolder}/dist/main.js",
+      "stopOnEntry": true,
+      "args": ["--wq"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run factions",
+      "program": "${workspaceFolder}/dist/main.js",
+      "stopOnEntry": true,
+      "args": ["--factions"]
+    }
+  ]
+}

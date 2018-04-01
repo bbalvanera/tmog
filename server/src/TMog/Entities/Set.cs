@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TMog.Business;
+using TMog.Common;
 
 namespace TMog.Entities
 {

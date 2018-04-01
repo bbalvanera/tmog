@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using TMog.Entities;
 
-namespace TMog.Business
+namespace TMog.Common
 {
     public class SlotManager
     {

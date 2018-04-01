@@ -1,4 +1,7 @@
-﻿using TMog.Business;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using TMog.Common;
 using TMog.Common;
 using TMog.Entities;
 using TMog.WebApi.Models;
@@ -39,6 +42,52 @@ namespace TMog.WebApi.Infrastructure
             CreateMap<Entities.Faction, Models.Faction>()
                 .ForMember(target => target.Id, opt => opt.MapFrom(source => source.FactionId))
                 .ReverseMap();
+
+            CreateMap<Models.RawWorldQuest, Entities.WorldQuest>()
+                .ForMember(target => target.QuestId, opt => opt.MapFrom(source => source.Id))
+                .ForMember(target => target.Side, opt => opt.ResolveUsing(source => WowSide.Both))
+                .ForMember(target => target.Category, opt => opt.ResolveUsing(source => (WorldQuestCategory)source.Type))
+                .ForMember(target => target.Factions, opt => opt.ResolveUsing(source =>
+                {
+                    return source.Factions?.Select(faction => new Entities.Faction { FactionId = faction }).ToList();
+                }))
+                .ForMember(target => target.Zone, opt => opt.ResolveUsing(source =>
+                {
+                    if (source.Zones == null || source.Zones.Count() == 0)
+                    {
+                        return null;
+                    }
+
+                    return new Entities.Zone { ZoneId = source.Zones.FirstOrDefault() };
+                }))
+                .ForMember(target => target.Instances, opt => opt.ResolveUsing(source =>
+                {
+                    var epoch      = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                    var expiration = epoch.AddMilliseconds(source.Ending.Value).ToLocalTime();
+
+                    return new List<WorldQuestInstance>
+                    {
+                        new WorldQuestInstance
+                        {
+                            ExpiresOn = expiration,
+                            QuestId   = source.Id.Value,
+                            Rewards   = source.Rewards?.Select(reward => new Entities.Item { ItemId = reward.Id.Value }).ToList()
+                        }
+                    };
+                }));
+
+            CreateMap<Entities.WorldQuest, Models.WorldQuest>()
+                .ForMember(target => target.WorldQuestId, opt => opt.MapFrom(source => source.QuestId))
+                .ForMember(target => target.ExpiresOn, opt => opt.MapFrom(source => source.Instances.Single().ExpiresOn))
+                .ForMember(target => target.Rewards, opt => opt.ResolveUsing(source =>
+                    source.Instances.Single().Rewards.Select(item => new WorldQuestReward
+                    {
+                        Id = item.ItemId,
+                        Name = item.Name,
+                        Quality = (int)item.Quality
+                    })
+                ));
+                
 
             CreateMap<Entities.Views.ZoneItem, ZoneItem>()
                 .ForMember(target => target.Slot, opt => opt.ResolveUsing(source => source.Slot.GetDisplayValue()))

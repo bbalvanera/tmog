@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TMog.Entities
+﻿namespace TMog.Entities
 {
     public class Quest
     {
@@ -12,8 +6,8 @@ namespace TMog.Entities
 
         public string Name { get; set; }
 
-        public int RequiredLevel { get; set; }
+        public WowSide Side { get; set; }
 
-        public int MyProperty { get; set; }
+        public Zone Zone { get; set; }
     }
 }

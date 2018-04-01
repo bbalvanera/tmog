@@ -1,0 +1,1124 @@
+[
+  {
+    "category": "Other",
+    "id": 2180,
+    "name": "_JKL - test rep",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1740,
+    "name": "Aeda Brightdawn",
+    "side": "Barracks Bodyguards"
+  },
+  {
+    "category": "Legion",
+    "id": 2099,
+    "name": "Akule Riverhorn",
+    "side": "Other"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1037,
+    "name": "Alliance Vanguard",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1515,
+    "name": "Arakkoa Outcasts",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 1862,
+    "name": "Arcane Thirst (Oculeth)",
+    "side": "The Nightfallen"
+  },
+  {
+    "category": "Legion",
+    "id": 1861,
+    "name": "Arcane Thirst (Silgryn) DEPRECATED",
+    "side": "The Nightfallen"
+  },
+  {
+    "category": "Legion",
+    "id": 1860,
+    "name": "Arcane Thirst (Thalyssra)",
+    "side": "The Nightfallen"
+  },
+  {
+    "category": "Legion",
+    "id": 1919,
+    "name": "Arcane Thirst (Valtrois)",
+    "side": "The Nightfallen"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1106,
+    "name": "Argent Crusade",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 529,
+    "name": "Argent Dawn",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2170,
+    "name": "Argussian Reach",
+    "side": "Other"
+  },
+  {
+    "category": "Other",
+    "id": 2167,
+    "name": "Argussian Reach (Paragon)",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2045,
+    "name": "Armies of Legionfall",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2091,
+    "name": "Armies of Legionfall (Paragon)",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2165,
+    "name": "Army of the Light",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2166,
+    "name": "Army of the Light (Paragon)",
+    "side": "Other"
+  },
+  {
+    "category": "Other",
+    "id": 2063,
+    "name": "Arne Test - Paragon Reputation Stormwind",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 1012,
+    "name": "Ashtongue Deathsworn",
+    "side": "Other"
+  },
+  {
+    "category": "Cataclysm",
+    "id": 1204,
+    "name": "Avengers of Hyjal",
+    "side": "Other"
+  },
+  {
+    "category": "Cataclysm",
+    "id": 1177,
+    "name": "Baradin's Wardens",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1735,
+    "name": "Barracks Bodyguards",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 1133,
+    "name": "Bilgewater Cartel",
+    "side": "Horde"
+  },
+  {
+    "category": "Classic",
+    "id": 2011,
+    "name": "Bizmo's Brawlpub",
+    "side": "Alliance Forces"
+  },
+  {
+    "category": "Classic",
+    "id": 1419,
+    "name": "Bizmo's Brawlpub (Season 1)",
+    "side": "Alliance Forces"
+  },
+  {
+    "category": "Classic",
+    "id": 1691,
+    "name": "Bizmo's Brawlpub (Season 2)",
+    "side": "Alliance Forces"
+  },
+  {
+    "category": "Classic",
+    "id": 87,
+    "name": "Bloodsail Buccaneers",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 21,
+    "name": "Booty Bay",
+    "side": "Steamwheedle Cartel"
+  },
+  {
+    "category": "Classic",
+    "id": 2010,
+    "name": "Brawl'gar Arena",
+    "side": "Horde Forces"
+  },
+  {
+    "category": "Classic",
+    "id": 1374,
+    "name": "Brawl'gar Arena (Season 1)",
+    "side": "Horde Forces"
+  },
+  {
+    "category": "Classic",
+    "id": 1690,
+    "name": "Brawl'gar Arena (Season 2)",
+    "side": "Horde Forces"
+  },
+  {
+    "category": "Classic",
+    "id": 910,
+    "name": "Brood of Nozdormu",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 609,
+    "name": "Cenarion Circle",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 942,
+    "name": "Cenarion Expedition",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1277,
+    "name": "Chee Chee",
+    "side": "The Tillers"
+  },
+  {
+    "category": "Legion",
+    "id": 2135,
+    "name": "Chromie",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 1975,
+    "name": "Conjurer Margoss",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2100,
+    "name": "Corbyn",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1731,
+    "name": "Council of Exarchs",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 1900,
+    "name": "Court of Farondis",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2087,
+    "name": "Court of Farondis (Paragon)",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 909,
+    "name": "Darkmoon Faire",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1440,
+    "name": "Darkspear Rebellion",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 530,
+    "name": "Darkspear Trolls",
+    "side": "Horde"
+  },
+  {
+    "category": "Classic",
+    "id": 69,
+    "name": "Darnassus",
+    "side": "Alliance"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1738,
+    "name": "Defender Illona",
+    "side": "Barracks Bodyguards"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1733,
+    "name": "Delvar Ironfist",
+    "side": "Barracks Bodyguards"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1375,
+    "name": "Dominance Offensive",
+    "side": "Other"
+  },
+  {
+    "category": "Cataclysm",
+    "id": 1172,
+    "name": "Dragonmaw Clan",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 1883,
+    "name": "Dreamweavers",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2088,
+    "name": "Dreamweavers (Paragon)",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1275,
+    "name": "Ella",
+    "side": "The Tillers"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1492,
+    "name": "Emperor Shaohao",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 577,
+    "name": "Everlook",
+    "side": "Steamwheedle Cartel"
+  },
+  {
+    "category": "Classic",
+    "id": 930,
+    "name": "Exodar",
+    "side": "Alliance"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1068,
+    "name": "Explorers' League",
+    "side": "Alliance Vanguard"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1283,
+    "name": "Farmer Fung",
+    "side": "The Tillers"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1282,
+    "name": "Fish Fellreed",
+    "side": "The Tillers"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1228,
+    "name": "Forest Hozen",
+    "side": "Other"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1104,
+    "name": "Frenzyheart Tribe",
+    "side": "Sholazar Basin"
+  },
+  {
+    "category": "Classic",
+    "id": 729,
+    "name": "Frostwolf Clan",
+    "side": "Horde Forces"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1445,
+    "name": "Frostwolf Orcs",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 369,
+    "name": "Gadgetzan",
+    "side": "Steamwheedle Cartel"
+  },
+  {
+    "category": "Classic",
+    "id": 92,
+    "name": "Gelkis Clan Centaur",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 1815,
+    "name": "Gilnean Survivors",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 1134,
+    "name": "Gilneas",
+    "side": "Alliance"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1281,
+    "name": "Gina Mudclaw",
+    "side": "The Tillers"
+  },
+  {
+    "category": "Classic",
+    "id": 54,
+    "name": "Gnomeregan",
+    "side": "Alliance"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1269,
+    "name": "Golden Lotus",
+    "side": "Other"
+  },
+  {
+    "category": "Cataclysm",
+    "id": 1158,
+    "name": "Guardians of Hyjal",
+    "side": "Other"
+  },
+  {
+    "category": "Guild",
+    "id": 1168,
+    "name": "Guild",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1847,
+    "name": "Hand of the Prophet",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1279,
+    "name": "Haohan Mudclaw",
+    "side": "The Tillers"
+  },
+  {
+    "category": "Cataclysm",
+    "id": 1178,
+    "name": "Hellscream's Reach",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 1828,
+    "name": "Highmountain Tribe",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2085,
+    "name": "Highmountain Tribe (Paragon)",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 946,
+    "name": "Honor Hold",
+    "side": "Other"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1052,
+    "name": "Horde Expedition",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 1352,
+    "name": "Huojin Pandaren",
+    "side": "Horde"
+  },
+  {
+    "category": "Classic",
+    "id": 749,
+    "name": "Hydraxian Waterlords",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 1947,
+    "name": "Illidari",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2097,
+    "name": "Ilyssia of the Waters",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2102,
+    "name": "Impus",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 47,
+    "name": "Ironforge",
+    "side": "Alliance"
+  },
+  {
+    "category": "Legion",
+    "id": 1888,
+    "name": "Jandvik Vrykul",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1273,
+    "name": "Jogu the Drunk",
+    "side": "The Tillers"
+  },
+  {
+    "category": "Legion",
+    "id": 2098,
+    "name": "Keeper Raynae",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 989,
+    "name": "Keepers of Time",
+    "side": "Other"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1090,
+    "name": "Kirin Tor",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1387,
+    "name": "Kirin Tor Offensive",
+    "side": "Other"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1098,
+    "name": "Knights of the Ebon Blade",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 978,
+    "name": "Kurenai",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1708,
+    "name": "Laughing Skull Orcs",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1741,
+    "name": "Leorajh",
+    "side": "Barracks Bodyguards"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 1011,
+    "name": "Lower City",
+    "side": "Shattrath City"
+  },
+  {
+    "category": "Classic",
+    "id": 93,
+    "name": "Magram Clan Centaur",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 1989,
+    "name": "Moon Guard",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 1899,
+    "name": "Moonguard",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1358,
+    "name": "Nat Pagle",
+    "side": "The Anglers"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 1015,
+    "name": "Netherwing",
+    "side": "Other"
+  },
+  {
+    "category": "Other",
+    "id": 1357,
+    "name": "Nomi",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 1038,
+    "name": "Ogri'la",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1276,
+    "name": "Old Hillpaw",
+    "side": "The Tillers"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1376,
+    "name": "Operation: Shieldwall",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1849,
+    "name": "Order of the Awakened",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1271,
+    "name": "Order of the Cloud Serpent",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 76,
+    "name": "Orgrimmar",
+    "side": "Horde"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1242,
+    "name": "Pearlfin Jinyu",
+    "side": "Other"
+  },
+  {
+    "category": "Cataclysm",
+    "id": 1173,
+    "name": "Ramkahen",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 470,
+    "name": "Ratchet",
+    "side": "Steamwheedle Cartel"
+  },
+  {
+    "category": "Classic",
+    "id": 349,
+    "name": "Ravenholdt",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2101,
+    "name": "Sha'leth",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1710,
+    "name": "Sha'tari Defense",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 1031,
+    "name": "Sha'tari Skyguard",
+    "side": "Shattrath City"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1270,
+    "name": "Shado-Pan",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1435,
+    "name": "Shado-Pan Assault",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1520,
+    "name": "Shadowmoon Exiles",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1216,
+    "name": "Shang Xi's Academy",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 1077,
+    "name": "Shattered Sun Offensive",
+    "side": "Shattrath City"
+  },
+  {
+    "category": "Classic",
+    "id": 809,
+    "name": "Shen'dralar",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1278,
+    "name": "Sho",
+    "side": "The Tillers"
+  },
+  {
+    "category": "Classic",
+    "id": 911,
+    "name": "Silvermoon City",
+    "side": "Horde"
+  },
+  {
+    "category": "Classic",
+    "id": 890,
+    "name": "Silverwing Sentinels",
+    "side": "Alliance Forces"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 970,
+    "name": "Sporeggar",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1732,
+    "name": "Steamwheedle Draenor Expedition",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1711,
+    "name": "Steamwheedle Preservation Society",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 730,
+    "name": "Stormpike Guard",
+    "side": "Alliance Forces"
+  },
+  {
+    "category": "Classic",
+    "id": 72,
+    "name": "Stormwind",
+    "side": "Alliance"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1388,
+    "name": "Sunreaver Onslaught",
+    "side": "Other"
+  },
+  {
+    "category": "Other",
+    "id": 70,
+    "name": "Syndicate",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2018,
+    "name": "Talon's Vengeance",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1737,
+    "name": "Talonpriest Ishaal",
+    "side": "Barracks Bodyguards"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 932,
+    "name": "The Aldor",
+    "side": "Shattrath City"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1302,
+    "name": "The Anglers",
+    "side": "Other"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1156,
+    "name": "The Ashen Verdict",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1341,
+    "name": "The August Celestials",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1359,
+    "name": "The Black Prince",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1351,
+    "name": "The Brewmasters",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 933,
+    "name": "The Consortium",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 510,
+    "name": "The Defilers",
+    "side": "Horde Forces"
+  },
+  {
+    "category": "Cataclysm",
+    "id": 1135,
+    "name": "The Earthen Ring",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 1984,
+    "name": "The First Responders",
+    "side": "Other"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1126,
+    "name": "The Frostborn",
+    "side": "Alliance Vanguard"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1067,
+    "name": "The Hand of Vengeance",
+    "side": "Horde Expedition"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1073,
+    "name": "The Kalu'ak",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1337,
+    "name": "The Klaxxi",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 509,
+    "name": "The League of Arathor",
+    "side": "Alliance Forces"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1345,
+    "name": "The Lorewalkers",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 941,
+    "name": "The Mag'har",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 1859,
+    "name": "The Nightfallen",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2089,
+    "name": "The Nightfallen (Paragon)",
+    "side": "Other"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1105,
+    "name": "The Oracles",
+    "side": "Sholazar Basin"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1850,
+    "name": "The Saberstalkers",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 990,
+    "name": "The Scale of the Sands",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 934,
+    "name": "The Scryers",
+    "side": "Shattrath City"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 935,
+    "name": "The Sha'tar",
+    "side": "Shattrath City"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1094,
+    "name": "The Silver Covenant",
+    "side": "Alliance Vanguard"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1119,
+    "name": "The Sons of Hodir",
+    "side": "Other"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1124,
+    "name": "The Sunreavers",
+    "side": "Horde Expedition"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1064,
+    "name": "The Taunka",
+    "side": "Horde Expedition"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1272,
+    "name": "The Tillers",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 967,
+    "name": "The Violet Eye",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 1894,
+    "name": "The Wardens",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2090,
+    "name": "The Wardens (Paragon)",
+    "side": "Other"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1091,
+    "name": "The Wyrmrest Accord",
+    "side": "Other"
+  },
+  {
+    "category": "Cataclysm",
+    "id": 1171,
+    "name": "Therazane",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 59,
+    "name": "Thorium Brotherhood",
+    "side": "Other"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 947,
+    "name": "Thrallmar",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 81,
+    "name": "Thunder Bluff",
+    "side": "Horde"
+  },
+  {
+    "category": "Classic",
+    "id": 576,
+    "name": "Timbermaw Hold",
+    "side": "Other"
+  },
+  {
+    "category": "Mists of Pandaria",
+    "id": 1280,
+    "name": "Tina Mudclaw",
+    "side": "The Tillers"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1736,
+    "name": "Tormmok",
+    "side": "Barracks Bodyguards"
+  },
+  {
+    "category": "The Burning Crusade",
+    "id": 922,
+    "name": "Tranquillien",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 1353,
+    "name": "Tushui Pandaren",
+    "side": "Alliance"
+  },
+  {
+    "category": "Classic",
+    "id": 68,
+    "name": "Undercity",
+    "side": "Horde"
+  },
+  {
+    "category": "Legion",
+    "id": 1948,
+    "name": "Valarjar",
+    "side": "Other"
+  },
+  {
+    "category": "Legion",
+    "id": 2086,
+    "name": "Valarjar (Paragon)",
+    "side": "Other"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1050,
+    "name": "Valiance Expedition",
+    "side": "Alliance Vanguard"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1739,
+    "name": "Vivianne",
+    "side": "Barracks Bodyguards"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1848,
+    "name": "Vol'jin's Headhunters",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1681,
+    "name": "Vol'jin's Spear",
+    "side": "Other"
+  },
+  {
+    "category": "Wrath of the Lich King",
+    "id": 1085,
+    "name": "Warsong Offensive",
+    "side": "Horde Expedition"
+  },
+  {
+    "category": "Classic",
+    "id": 889,
+    "name": "Warsong Outriders",
+    "side": "Horde Forces"
+  },
+  {
+    "category": "Cataclysm",
+    "id": 1174,
+    "name": "Wildhammer Clan",
+    "side": "Other"
+  },
+  {
+    "category": "Other",
+    "id": 589,
+    "name": "Wintersaber Trainers",
+    "side": "Other"
+  },
+  {
+    "category": "Warlords of Draenor",
+    "id": 1682,
+    "name": "Wrynn's Vanguard",
+    "side": "Other"
+  },
+  {
+    "category": "Classic",
+    "id": 270,
+    "name": "Zandalar Tribe",
+    "side": "Other"
+  }
+]

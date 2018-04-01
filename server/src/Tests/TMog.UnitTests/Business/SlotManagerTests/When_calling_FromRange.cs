@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TMog.Business;
+using TMog.Common;
 using TMog.Entities;
 
 namespace TMog.UnitTests.Business.SlotManagerTests

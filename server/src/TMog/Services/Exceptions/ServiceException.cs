@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TMog.Services
+namespace TMog.Services.Exceptions
 {
 
     [Serializable]

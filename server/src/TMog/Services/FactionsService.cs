@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TMog.Data;
 using TMog.Entities;
 using TMog.Properties;
+using TMog.Services.Exceptions;
 
 namespace TMog.Services
 {
@@ -18,7 +19,7 @@ namespace TMog.Services
             this.tmogContext = tmogContext;
         }
 
-        public async Task AddAll(IEnumerable<Faction> factions)
+        public async Task Save(IEnumerable<Faction> factions)
         {
             if (factions == null || factions.Count() == 0)
             {

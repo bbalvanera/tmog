@@ -21,6 +21,7 @@ namespace TMog.WebApi.Infrastructure
             Bind<IZonesService>().To<ZonesService>();
             Bind<IItemsService>().To<ItemsService>();
             Bind<IFactionsService>().To<FactionsService>();
+            Bind<IWorldQuestsService>().To<WorldQuestsService>();
         }
     }
 }

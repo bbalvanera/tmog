@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace TMog.Services
+namespace TMog.Services.Exceptions
 {
 
     [Serializable]
-    public class DuplicateEntityException : SystemException
+    public class DuplicateEntityException : ServiceException
     {
         public DuplicateEntityException() { }
         public DuplicateEntityException(string message) : base(message) { }

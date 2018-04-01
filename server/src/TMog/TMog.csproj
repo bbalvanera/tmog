@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=6.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\..\bin\AutoMapper.6.2.1\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\bin\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\bin\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -58,6 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Shared\WorldQuestSelector.cs" />
+    <Compile Include="Services\WorldQuestManager.cs" />
     <Compile Include="Common\EnumHelper.cs" />
     <Compile Include="Common\Pair.cs" />
     <Compile Include="Common\PairMapper.cs" />
@@ -65,25 +67,35 @@
     <Compile Include="Data\Common\PairMapper.cs" />
     <Compile Include="Data\Configuration\FactionEntityConfiguration.cs" />
     <Compile Include="Data\Configuration\ItemEntityConfiguration.cs" />
+    <Compile Include="Data\Configuration\QuestEntityConfiguration.cs" />
     <Compile Include="Data\Configuration\RegionEntityConfiguration.cs" />
     <Compile Include="Data\Configuration\SetEntityConfiguration.cs" />
     <Compile Include="Data\Configuration\SourceEntityConfiguration.cs" />
     <Compile Include="Data\Configuration\TMogDbInitializer.cs" />
+    <Compile Include="Data\Configuration\WorldQuestEntityConfiguration.cs" />
+    <Compile Include="Data\Configuration\WorldQuestInstanceEntityConfiguration.cs" />
+    <Compile Include="Data\Configuration\WorldQuestSubmissionLogEntityConfiguration.cs" />
     <Compile Include="Data\Configuration\ZoneEntityConfiguration.cs" />
     <Compile Include="Data\ITMogDatabase.cs">
       <DependentUpon>TMogDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\Migrations\MigrationConfiguration.cs" />
     <Compile Include="Data\TMogDatabase.cs" />
-    <Compile Include="Business\SlotManager.cs" />
+    <Compile Include="Shared\SlotManager.cs" />
     <Compile Include="Entities\DropLevel.cs" />
     <Compile Include="Entities\Faction.cs" />
     <Compile Include="Entities\Item.cs" />
-    <Compile Include="Entities\ItemInfo.cs" />
     <Compile Include="Entities\QualityType.cs" />
     <Compile Include="Entities\Quest.cs" />
+    <Compile Include="Entities\WorldQuestCategory.cs" />
     <Compile Include="Entities\Region.cs" />
     <Compile Include="Entities\Set.cs" />
+    <Compile Include="Entities\WorldQuest.cs" />
+    <Compile Include="Entities\WorldQuestFilter.cs" />
+    <Compile Include="Entities\WorldQuestFilterType.cs" />
+    <Compile Include="Entities\WorldQuestInstance.cs" />
+    <Compile Include="Entities\WorldQuestsSubmissionLog.cs" />
+    <Compile Include="Entities\WowSide.cs" />
     <Compile Include="Entities\SlotType.cs" />
     <Compile Include="Entities\Source.cs" />
     <Compile Include="Entities\SourceSubType.cs" />
@@ -99,7 +111,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\DuplicateEntityException.cs" />
+    <Compile Include="Services\ChangeDetectionSupressor.cs" />
+    <Compile Include="Services\Exceptions\EntityNotFoundException.cs" />
+    <Compile Include="Services\Exceptions\DuplicateEntityException.cs" />
     <Compile Include="Services\FactionsService.cs" />
     <Compile Include="Services\IFactionsService.cs">
       <DependentUpon>FactionsService.cs</DependentUpon>
@@ -112,11 +126,16 @@
       <DependentUpon>SetsService.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\ItemsService.cs" />
+    <Compile Include="Services\IWorldQuestsService.cs">
+      <DependentUpon>WorldQuestsService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\IZonesService.cs">
       <DependentUpon>ZonesService.cs</DependentUpon>
     </Compile>
-    <Compile Include="Services\ServiceException.cs" />
+    <Compile Include="Services\Exceptions\InvalidDataException.cs" />
+    <Compile Include="Services\Exceptions\ServiceException.cs" />
     <Compile Include="Services\SetsService.cs" />
+    <Compile Include="Services\WorldQuestsService.cs" />
     <Compile Include="Services\ZonesService.cs" />
     <Compile Include="WowApi\Infrastructure\WowLocation.cs" />
     <Compile Include="WowApi\Infrastructure\WowZone.cs" />

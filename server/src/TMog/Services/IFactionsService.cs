@@ -6,6 +6,6 @@ namespace TMog.Services
 {
     public interface IFactionsService
     {
-        Task AddAll(IEnumerable<Faction> factions);
+        Task Save(IEnumerable<Faction> factions);
     }
 }

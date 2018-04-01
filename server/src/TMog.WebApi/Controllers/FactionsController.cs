@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TMog.Services;
+using TMog.Services.Exceptions;
 using TMog.WebApi.Models;
 
 namespace TMog.WebApi.Controllers
@@ -27,7 +28,7 @@ namespace TMog.WebApi.Controllers
             try
             {
                 var dataFactions = Mapper.Map<IEnumerable<Entities.Faction>>(factions);
-                await service.AddAll(dataFactions);
+                await service.Save(dataFactions);
 
                 return Ok();
             }
@@ -37,7 +38,7 @@ namespace TMog.WebApi.Controllers
             }
             catch (ServiceException)
             {
-                // log exception
+                //TODO: log exception
                 return InternalServerError(new Exception("Internal Data Error"));
             }
         }

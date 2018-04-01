@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TMog.Business;
+using TMog.Common;
 using TMog.Entities;
 
 namespace TMog.UnitTests.Business.SlotManagerTests
